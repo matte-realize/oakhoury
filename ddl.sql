@@ -31,7 +31,7 @@ CREATE TABLE volunteer_applications (
 
 CREATE TYPE tolerance AS ENUM ('moderate', 'high', 'very high');
 CREATE TYPE rate AS ENUM ('slow', 'moderate', 'fast', 'very fast');
-CREATE TYPE foliage AS ENUM ('deciduous', 'evergreen', 'semi-evergreen', 'late-deciduous');
+CREATE TYPE foliage AS ENUM ('deciduous', 'drought-deciduous', 'evergreen', 'semi-evergreen', 'late-deciduous');
 CREATE TYPE root_damage AS ENUM ('low', 'moderate', 'high');
 CREATE TYPE nursery_availability AS ENUM ('low', 'moderate', 'high');
 CREATE TABLE trees (
