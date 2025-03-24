@@ -162,8 +162,8 @@ VALUES
 
 INSERT INTO residents (id, first_name, last_name, email, password, street, zipCode, is_volunteer, neighborhood)
 VALUES
-    (1, 'Jordan', 'Pinnick', 'pinnick.j@northeastern.edu', 'hello2F4', '5000 MacArthur Blvd',94613, false, 'Mills College'),
-    (2, 'Devan', 'Kumar', 'kumar.deva@northeastern.edu', 'miss27ouri', '4341 Davis Street',94601, false, 'Harrington'),
+    (1, 'Jordan', 'Pinnick', 'pinnick.j@northeastern.edu', 'hello2F4', '5000 MacArthur Blvd', 94613, false, 'Mills College'),
+    (2, 'Devan', 'Kumar', 'kumar.deva@northeastern.edu', 'miss27ouri', '4341 Davis Street', 94601, false, 'Harrington'),
     (3, 'Matthew', 'Shi', 'shi.mat@northeastern.edu', 'vintage1092', '1506 Linden Street', 94607, true, 'Oak Center'),
     (4, 'Ashwin', 'Iyer', 'iyer.ashw@northeastern.edu', 'minne2311', '2281 E 10th Street', 94601, true, 'Prescott'),
     (5, 'Baoren', 'Liu', 'liu.baor@northeastern.edu', 'kansl1865', '5567 Carlton Street', 94618, true, 'Rockridge'),
@@ -172,10 +172,24 @@ VALUES
     (8, 'Lily', 'Green', 'lilygreenhappy@yahoo.com', 'vdF43fg', '7945 Sunkist Drive', 94605, true, 'Eastmont Hills'),
     (9, 'Ella', 'Li', 'eli5@gmail.com', 'uimvl29', '7616 Weld Street', 94621, false, 'Arroyo Viejo'),
     (10, 'Aaron', 'Williams', 'will.aaron@gmail.com', '38572ab', '1306 31st Avenue', 94601, false, 'Fruitvale')
+    (11, 'Henry', 'Cage', 'henryc@outlook.com', 'nmfgh347', '' , , false, ''),
+    (12, 'Tracy', 'Kemp', 'tracy020@gmail.com', 'gfdidij28', '', , false, ''),
+    (13, 'Tracy', 'Haynes', 'haytray930@gmail.com', 'bhgv23', '', , false, ''),
+    (14, 'Drew', 'Glenn', 'dgdg@outlook.com', '4324mdf', '', , true, ''),
+    (15, 'April', 'Cain', '4c4c@gmail.com', '544ffd', '', , true, ''),
+    (16, 'Jasper', 'Ruiz', 'jasperRRRR@gmail.com', '09876fdgf', '', , true, ''),
+    (17, 'Holden', 'Schmitt', 'schold@gmail.com', 'lmaj289', '', , true, ''),
+    (18, 'Allen', 'Bell', 'bell.allen@outlook.com', 'happy2839', '', , true, ''),
+    (19, 'Raymond', 'Bell', 'raymond.bell@gmail.com', 'cake23672', '', , true, ''),
+    (20, 'Harvey', 'Choi', 'imharvey@yahoo.com', '3827352', '', , true, ''),
+    (21, 'Savanna', 'Jackson', 'savajack@gmail.com', 'abcdefghij', '', , true, '')
+;
 
 INSERT INTO organization_members (resident_id, role, start_date)
 VALUES
-    ()
+    (1, 'administrator', 1/1/2022),
+    (2, 'administrator', 1/1/2022),
+    (11, 'lead planter', 5/5/2023)
 ;
 
 INSERT INTO volunteer_applications (resident_id, created, approved, notes)
@@ -186,80 +200,98 @@ VALUES
     (6, 12/8/2023, true, ''),
     (7, 6/1/2022, false, ''),
     (8, 8/9/2023, true, ''),
-    (9, 11/4/2024, false, '')
+    (9, 11/4/2024, false, ''),
+    (14, 8/11/2024, true, ''),
+    (15, 3/1/2025, true, ''),
+    (21, 1/5/2025, true, '')
 ;
 
 INSERT INTO trees (id, common_name, scientific_name, height_range, width_range, minimum_planting_bed_width, plantable_under_power_lines, native_to_ca, drought_tolerance, growth_rate, foliage_type, debris, root_damage_potential, nursery_availability, visual_attraction, pzharshsites, pzbay, pzurbanized, pznearnaturalareas)
 VALUES
-    (1, 'African fern pine', 'Afrocarpus graciliar', int4range(40-60), int4range(25-35), 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
-    (2, 'Aleppo oak', 'Quercus boissieri', int4range(30-40), int4range(30-50), 5, false, false, 'high', 'moderate', 'deciduous', 'low acorn potential', 'moderate', 'low', 'Fall color', false, false, true, true),
-    (3, 'Atlas cedar', 'Cedrus atlantica', int4range(60-100), int4range(30-45), 6, false, false, 'very high', 'fast', 'evergreen', 'low', 'high', 'low', 'Structure', false, false, true, true),
-    (4, 'Brisbane box', 'Lophostemon confertus', int4range(40-60), int4range(25-40), 5, false, false, 'moderate', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Bark', false, true, true, false),
-    (5, 'Bronze loquat', 'Eriobotrya deflexa', int4range(15-25), int4range(20-30), 3, true, false, 'moderate', 'moderate', 'evergreen', 'moderate', 'low', 'moderate', 'Foliage, flowers', false, false, true, false),
-    (6, 'Cajeput tree', 'Melaleuca quinquenervia', int4range(20-35), int4range(15-35), 4, false, false, 'very high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Bark flower', true, true, true, false),
-    (7, 'California buckeye', 'Aesculus caliornica', int4range(20-30), int4range(20-50), 8, true, true, 'high', 'slow', 'drought-deciduous', 'large seeds', 'moderate', 'moderate', 'Structure, fruit', false, false, false, true),
-    (8, 'Canary Island pine', 'Pinus canariensis', int4range(60-100), int4range(20-40), 8, false, false, 'very high', 'fast', 'evergreen', 'large cones, limb failure', 'high', 'high', 'foliage, bark', false, true, true, true),
-    (9, 'Catalina cherry', 'Prunus lyanii', int4range(15-30), int4range(10-30), 8, true, true, 'high', 'moderate', 'evergreen', 'high fruit potential', 'low', 'moderate', 'Flower, foliage', false, false, true, true),
-    (10, 'Chestnut leaf oak', 'Quercus castaneifolia', int4range(50-100), int4range(30-60), 6, false, false, 'high', 'very fast', 'deciduous', 'high acorn potential', 'high', 'low', 'Size, structure', false, false, true, false),
-    (11, 'Chinese pistache', 'Pistacia chinesis', int4range(30-40), int4range(25-40), 5, false, false, 'very high', 'moderate', 'deciduous', 'low', 'moderate', 'high', 'Fall color', false, false, true, false),
-    (12, 'Chisos red oak', 'Quercus gravesii', int4range(25-35), int4range(15-30), 4, false, false, 'high', 'moderate', 'late-deciduous', 'low acorn potential', 'low', 'low', 'Winter color', false, false, true, true),
-    (13, 'Coast live oak', 'Quercus agrifolia', int4range(40-80), int4range(30-100), 6, false, true, 'high', 'moderate', 'evergreen', 'acorns, dripping exudate', 'moderate', 'high', 'Structure, foliage', false, false, false, true),
-    (14, 'Compact strawberry tree', 'Arbutus unedo Compacta', int4range(10-20), int4range(10-20), 8, true, false, 'high', 'slow', 'evergreen', 'high fruit potential', 'low', 'moderate', 'Flowers, trunk, fruit', false, true, true, true),
-    (15, 'Compton oak', 'Quercus x comptaniae', int4range(40-60), int4range(30-50), 5, false, false, 'high', 'fast', 'deciduous', 'moderate acorn potential', 'moderate', 'moderate', 'Fall color', false, false, true, false),
-    (16, 'Cork oak', 'Quercus suber', int4range(40-80), int4range(30-60), 6, false, false, 'very high', 'fast', 'semi-evergreen', 'moderate acorn potential', 'moderate', 'high', 'Bark', false, true, true, true),
-    (17, 'Crape myrtle, Choctaw', 'Lagerstroemia Choctaw', int4range(15-25), int4range(15-25), 4, true, false, 'high', 'slow', 'deciduous', 'low', 'low', 'low', 'Fall color, flower, bark', false, false, true, false),
-    (18, 'Crape myrtle, muskogee', 'Lagerstroemia Muskogee', int4range(15-25), int4range(15-25), 3, true, false, 'high', 'slow', 'deciduous', 'low', 'low', 'high', 'Fall color, flowers, bark', false, false, true, false),
-    (19, 'Crape myrtle, natchez', 'Lagerstroemia Natchez', int4range(20-30), int4range(25-35), 4, true, false, 'high', 'moderate', 'deciduous', 'low', 'low', 'high', 'Fall color, flowers, bark', false, false, true, false),
-    (20, 'Crape myrtle, tuscarora', 'Lagerstroemia Tuscarora', int4range(15-20), int4range(10-15), 3, true, false, 'high', 'slow', 'deciduous', 'low', 'low', 'moderate', 'Flowers, bark', false, false, true, false),
-    (21, 'Encino tezahuatl', 'Quercus mexicana', int4range(40-60), int4range(30-50), 5, false, false, 'high', 'fast', 'evergreen', 'low acorn potential', 'moderate', 'moderate', 'Structure', false, false, true, true),
-    (22, 'Engelmann oak', 'Quercus engelmannii', int4range(40-80), int4range(30-100), 5, false, true, 'high', 'moderate', 'semi-evergreen', 'moderate acorn potential', 'moderate', 'low', 'Bluish foliage', false, false, true, true),
-    (23, 'Escarpment oak', 'Quercus fusiformis', int4range(40-60), int4range(25-40), 5, false, false, 'very high', 'moderate', 'semi-evergreen', 'moderate acorn potential', 'moderate', 'low', 'Foliage, structure', false, false, true, true),
-    (24, 'Evergreen maple', 'Acer paxii', int4range(30-40), int4range(25-35), 5, false, false, 'moderate', 'moderate', 'evergreen', 'low', 'moderate', 'low', 'Foliage', false, false, true, false),
-    (25, 'Fastigate blue atlas cedar', 'Cedrus atlantica Glauca Fastigata', int4range(40-60), int4range(25-35), 6, false, false, 'very high', 'moderate', 'evergreen', 'low', 'high', 'low', 'Bluish foliage', false, false, true, true),
-    (26, 'Flamegold', 'Koelreuteria elegans', int4range(40-60), int4range(35-45), 6, false, false, 'high', 'fast', 'semi-evergreen', 'moderate', 'moderate', 'moderate', 'Flowers', false, false, true, false),
-    (27, 'Ghost gum', 'Carymbia aparrerinja', int4range(50-70), int4range(30-40), 6, false, false, 'very high', 'fast', 'evergreen', 'moderate', 'high', 'moderate', 'Bluish foliage', true, true, true, false),
-    (28, 'Gold medallion tree', 'Cassia lepyophylla', int4range(15-25), int4range(20-35), 3, true, false, 'high', 'slow', 'evergreen', 'moderate', 'low', 'high', 'Flowers', false, false, true, false),
-    (29, 'Hollywood juniper', 'Juniperus chinensis Torulosa', int4range(20-30), int4range(10-30), 3, true, false, 'very high', 'slow', 'evergreen', 'low', 'low', 'low', 'Structure', true, true, true, true),
-    (30, 'Island oak', 'Quercus tomentella', int4range(40-70), int4range(30-50), 5, false, false, 'high', 'moderate', 'evergreen', 'low acorn potential', 'moderate', 'high', 'Foliage', false, true, true, true),
-    (31, 'Jelecote pine', 'Pinus patula', int4range(40-60), int4range(35-60), 6, false, false, 'high', 'fast', 'evergreen', 'low', 'high', 'moderate', 'Foliage, bark', false, false, true, true),
-    (32, 'King palm', 'Achontophoenix cunninghamiana', int4range(35-60), int4range(10-20), 3, false, false, 'high', 'moderate', 'evergreen', 'moderate', 'low', 'low', 'Form, flowers', false, true, true, false),
-    (33, 'Lemon-scented gum', 'Carymbia citriodora', int4range(60-80), int4range(20,30), 6, false, false, 'high', 'fast', 'evergreen', 'low', 'moderate', 'low', 'Bark, structure', false, true, true, false),
-    (34, 'Macadamia', 'Macadamia integrifolia', int4range(25-35), int4range(20-30), 6, false, false, 'high', 'moderate', 'evergreen', 'moderate fruit production', 'moderate', 'high', 'Foliage, fruit''', false, true, true, false),
-    (35, 'Macdeonian oak', 'Quercus trojana', int4range(25-35), int4range(20-30), 4, false, false, 'high', 'moderate', 'deciduous', 'low, some acorns', 'low', 'low', 'Structure, fall color', false, false, false, true),
-    (36, 'Marina madrone', 'Arbutus Marina', int4range(20-40), int4range(20-30), 4, false, false, 'moderate', 'moderate', 'evergreen', 'moderate fruit drop', 'low', 'low', 'Bark, foliage, fruit', false, true, true, true),
-    (37, 'Mexican blue oak', 'Queurcus ablongifolia', int4range(40-60), int4range(30-80), 5, false, false, 'high', 'moderate', 'evergreen', 'low acorn potential', 'moderate', 'moderate', 'Bluish foliage', false, false, true, true),
-    (38, 'Mexican red oak', 'Quercus canbyi', int4range(35-60), int4range(25-45), 5, false, false, 'moderate', 'fast', 'semi-evergreen', 'low acorn potential', 'moderate', 'moderate', 'Winter color', false, false, true, false),
-    (39, 'Mount Lemmon super gambel oak', 'Quercus gambelli hybrid', int4range(35-50), int4range(25-40), 5, false, false, 'high', 'moderate', 'deciduous', 'moderate acorn potential', 'moderate', 'high', 'Fall color, foliage', false, false, true, true),
-    (40, 'Netleaf oak', 'Quercus rugosa', int4range(40-70), int4range(25-45), 5, false, false, 'high', 'moderate', 'evergreen', 'high acorn potential', 'moderate', 'high', 'New growth, foliage', false, true, true, false),
-    (41, 'New Zealand Christmas tree/Pohutukawa', 'Metrosideros exceisa', int4range(40-70), int4range(25-40), 6, false, false, 'high', 'fast', 'evergreen', 'low', 'high', 'moderate', 'Flowers, foliage', true, true, true, false),
-    (42, 'Olive, Swan Hill (single stem)', 'Olea Swan Hill', int4range(20-30), int4range(25-35), 6, true, false, 'high', 'moderate', 'evergreen', 'low (proven fruitless variety)', 'high', 'low', 'Structure, foliage', false, true, true, true),
-    (43, 'Pink trumpet tree', 'Handroanthus heptaphyilus', int4range(15-25), int4range(20-30), 4, true, false, 'high', 'moderate', 'semi-evergreen', 'low', 'low', 'low', 'Flowers', false, false, true, true),
-    (44, 'Pyrenees oak', 'Quercus pyrenaica', int4range(40-60), int4range(30-50), 5, false, false, 'high', 'moderate', 'deciduous', 'moderate acorn potential', 'high', 'moderate', 'Fall color', false, false, true, true),
-    (45, 'Red flowering gum', 'Carymbia ficifolia', int4range(25-40), int4range(30-50), 6, false, false, 'very high', 'fast', 'evergreen', 'high', 'high', 'low', 'Flowers', false, true, true, false),
-    (46, 'Red Push pistache', 'Pistacia x Red Push', int4range(30-50), int4range(30-50), 5, false, false, 'very high', 'moderate', 'semi-evergreen', 'low', 'moderate', 'moderate', 'New growth coloration', false, false, true, true),
-    (47, 'Roberts California sycamore', 'Platanus racemosa Roberts', int4range(50-90), int4range(30-60), 6, false, true, 'moderate', 'very fast', 'deciduous', 'moderate', 'high', 'low', 'Bark, structure', false, false, true, false),
-    (48, 'Rusty leaf fig', 'FIcus rubidginosa', int4range(30-50), int4range(25-50), 8, false, false, 'high', 'fast', 'evergreen', 'low', 'high', 'low', 'foliage', false, true, true, false),
-    (49, 'Sartors oak', 'Quercus sartorii', int4range(35-60), int4range(25-45), 5, false, false, 'moderate', 'fast', 'evergreen', 'low acorn potential', 'moderate', 'low', 'Foliage', false, false, true, false),
-    (50, 'Shangtung maple', 'Acer truncatum', int4range(10-20), int4range(15-20), 3, true, false, 'high', 'moderate', 'deciduous', 'low', 'low', 'moderate', 'Fall color', false, false, true, false),
-    (51, 'Silver dollar gum', 'Eucalyptus polyanthemos', int4range(60-80), int4range(40-50), 6, false, false, 'very high', 'very fast', 'evergreen', 'moderate', 'high', 'loe', 'Bluish foliage', true, true, true, false),
-    (52, 'Silverleaf oak', 'Quercus hypoleucoides', int4range(30-60), int4range(20-40), 5, false, false, 'high', 'moderate', 'evergreen', 'low acorn potential', 'low', 'high', 'Bicolor foliage', false, false, true, true),
-    (53, 'Soapbark tree', 'Quilaja saponaria', int4range(40-60), int4range(25-35), 4, false, false, 'moderate', 'moderate', 'evergreen', 'low', 'low', 'moderate', 'Structure, foliage', false, false, true, true),
-    (54, 'Southern live oak', 'Quercus virginiana', int4range(30-50), int4range(40-80), 6, false, false, 'high', 'moderate', 'semi-evergreen', 'low acorn potential', 'high', 'low', 'Structure, foliage', false, true, true, false),
-    (55, 'Swamp malee', 'Eucalyptus spathulata', int4range(20-40), int4range(25-35), 5, false, false, 'very high', 'moderate', 'evergreen', 'low', 'low', 'moderate', 'Bark, structure', true, true, true, false),
-    (56, 'Sweet hakea', 'Hakea drupacea', int4range(15-20), int4range(15-25), 3, true, false, 'very high', 'slow', 'evergreen', 'low', 'low', 'low', 'Foliage, flowers', true, true, true, false),
-    (57, 'Sydney red gum', 'Angophora costata', int4range(50-70), int4range(40-60), 6, false, false, 'high', 'fast', 'evergreen', 'moderate', 'high', 'moderate', 'Structure, bark', true, true, true, false),
-    (58, 'Torrey Pine', 'Pinus torreyana', int4range(60-120), int4range(40-90), 6, false, true, 'very high', 'very fast', 'evergreen', 'big cones', 'high', 'moderate', 'Bluish foliage,', false, true, true, true),
-    (59, 'Torreys hybrid oak', 'Quercus acutidens', int4range(15-25), int4range(15-35), 4, true, true, 'high', 'slow', 'evergreen', 'low acorn potential', 'low', 'low', 'Structure', false, false, true, true),
-    (60, 'Toyon, Davis Gold', 'Heteromeles arbutifolia Davis Gold', int4range(10-30), int4range(10-20), 3, true, true, 'high', 'moderate', 'evergreen', 'berries', 'low', 'low', 'Yellow berries', false, false, false, true),
-    (61, 'Trident maple', 'Acer buergerianum', int4range(20-25), int4range(15-25), 4, true, false, 'moderate', 's;pw', 'deciduous', 'low', 'low', 'moderate', 'Fall color, bark', false, false, true, false),
-    (62, 'Water gum', 'Tristaniopsis laurina', int4range(10-30), int4range(10-25), 3, true, false, 'moderate', 's;pw', 'evergreen', 'low', 'low', 'high', 'Bark, foliage', false, false, true, true),
-    (63, 'Weeping fig', 'Ficus benjamina', int4range(25-30), int4range(15-25), 6, true, false, 'high', 'fast', 'evergreen', 'low', 'moderate', 'moderate', 'Growth, habit', false, true, true, false),
-    (64, 'WestMax red oak', 'Qercus albocinta', int4range(25-40), int4range(20-35), 5, false, false, 'high', 'moderate', 'evergreen', 'low acorn potential', 'moderate', 'low', 'Foliage', false, false, true, true),
+    (1, 'African fern pine', 'Afrocarpus graciliar', int4range(40,60), int4range(25,35), 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', ARRAY['Green screen'], false, false, true, true),
+    (2, 'Aleppo oak', 'Quercus boissieri', int4range(30,40), int4range(30,50), 5, false, false, 'high', 'moderate', 'deciduous', 'low acorn potential', 'moderate', 'low', ARRAY['Fall color'], false, false, true, true),
+    (3, 'Atlas cedar', 'Cedrus atlantica', int4range(60,100), int4range(30,45), 6, false, false, 'very high', 'fast', 'evergreen', 'low', 'high', 'low', ARRAY['Structure'], false, false, true, true),
+    (4, 'Brisbane box', 'Lophostemon confertus', int4range(40,60), int4range(25,40), 5, false, false, 'moderate', 'moderate', 'evergreen', 'low', 'moderate', 'high', ARRAY['Bark'], false, true, true, false),
+    (5, 'Bronze loquat', 'Eriobotrya deflexa', int4range(15,25), int4range(20,30), 3, true, false, 'moderate', 'moderate', 'evergreen', 'moderate', 'low', 'moderate', ARRAY['Foliage, flowers}'], false, false, true, false),
+    (6, 'Cajeput tree', 'Melaleuca quinquenervia', int4range(20,35), int4range(15,35), 4, false, false, 'very high', 'moderate', 'evergreen', 'low', 'moderate', 'high', ARRAY['Bark, flower'], true, true, true, false),
+    (7, 'California buckeye', 'Aesculus caliornica', int4range(20,30), int4range(20,50), 8, true, true, 'high', 'slow', 'drought-deciduous', 'large seeds', 'moderate', 'moderate', ARRAY['Structure, fruit'], false, false, false, true),
+    (8, 'Canary Island pine', 'Pinus canariensis', int4range(60,100), int4range(20,40), 8, false, false, 'very high', 'fast', 'evergreen', 'large cones, limb failure', 'high', 'high', ARRAY['Foliage, bark'], false, true, true, true),
+    (9, 'Catalina cherry', 'Prunus lyanii', int4range(15,30), int4range(10,30), 8, true, true, 'high', 'moderate', 'evergreen', 'high fruit potential', 'low', 'moderate', ARRAY['Flower, foliage'], false, false, true, true),
+    (10, 'Chestnut leaf oak', 'Quercus castaneifolia', int4range(50,100), int4range(30,60), 6, false, false, 'high', 'very fast', 'deciduous', 'high acorn potential', 'high', 'low', ARRAY['Size, structure'], false, false, true, false),
+    (11, 'Chinese pistache', 'Pistacia chinesis', int4range(30,40), int4range(25,40), 5, false, false, 'very high', 'moderate', 'deciduous', 'low', 'moderate', 'high', ARRAY['Fall color'], false, false, true, false),
+    (12, 'Chisos red oak', 'Quercus gravesii', int4range(25,35), int4range(15,30), 4, false, false, 'high', 'moderate', 'late-deciduous', 'low acorn potential', 'low', 'low', ARRAY['Winter color'], false, false, true, true),
+    (13, 'Coast live oak', 'Quercus agrifolia', int4range(40,80), int4range(30,100), 6, false, true, 'high', 'moderate', 'evergreen', 'acorns, dripping exudate', 'moderate', 'high', ARRAY['Structure, foliage'], false, false, false, true),
+    (14, 'Compact strawberry tree', 'Arbutus unedo Compacta', int4range(10,20), int4range(10,20), 8, true, false, 'high', 'slow', 'evergreen', 'high fruit potential', 'low', 'moderate', ARRAY['Flowers, trunk, fruit'], false, true, true, true),
+    (15, 'Compton oak', 'Quercus x comptaniae', int4range(40,60), int4range(30,50), 5, false, false, 'high', 'fast', 'deciduous', 'moderate acorn potential', 'moderate', 'moderate', ARRAY['Fall color'], false, false, true, false),
+    (16, 'Cork oak', 'Quercus suber', int4range(40,80), int4range(30,60), 6, false, false, 'very high', 'fast', 'semi-evergreen', 'moderate acorn potential', 'moderate', 'high', ARRAY['Bark'], false, true, true, true),
+    (17, 'Crape myrtle, Choctaw', 'Lagerstroemia Choctaw', int4range(15,25), int4range(15,25), 4, true, false, 'high', 'slow', 'deciduous', 'low', 'low', 'low', ARRAY['Fall color, flower, bark'], false, false, true, false),
+    (18, 'Crape myrtle, muskogee', 'Lagerstroemia Muskogee', int4range(15,25), int4range(15,25), 3, true, false, 'high', 'slow', 'deciduous', 'low', 'low', 'high', ARRAY['Fall color, flowers, bark'], false, false, true, false),
+    (19, 'Crape myrtle, natchez', 'Lagerstroemia Natchez', int4range(20,30), int4range(25,35), 4, true, false, 'high', 'moderate', 'deciduous', 'low', 'low', 'high', ARRAY['Fall color, flowers, bark'], false, false, true, false),
+    (20, 'Crape myrtle, tuscarora', 'Lagerstroemia Tuscarora', int4range(15,20), int4range(10,15), 3, true, false, 'high', 'slow', 'deciduous', 'low', 'low', 'high', ARRAY['Flowers, bark'], false, false, true, false),
+    (21, 'Encino tezahuatl', 'Quercus mexicana', int4range(40,60), int4range(30,50), 5, false, false, 'high', 'fast', 'evergreen', 'low acorn potential', 'moderate', 'low', ARRAY['Structure'], false, false, true, true),
+    (22, 'Engelmann oak', 'Quercus engelmannii', int4range(40,80), int4range(30,100), 5, false, true, 'high', 'moderate', 'semi-evergreen', 'moderate acorn potential', 'moderate', 'moderate', ARRAY['Bluish foliage'], false, false, true, true),
+    (23, 'Escarpment oak', 'Quercus fusiformis', int4range(40,60), int4range(25,40), 5, false, false, 'very high', 'moderate', 'semi-evergreen', 'moderate acorn potential', 'moderate', 'moderate', ARRAY['Foliage, structure'], false, false, true, true),
+    (24, 'Evergreen maple', 'Acer paxii', int4range(30,40), int4range(25,35), 5, false, false, 'moderate', 'moderate', 'evergreen', 'low', 'moderate', 'low', ARRAY['Foliage'], false, false, true, false),
+    (25, 'Fastigate blue atlas cedar', 'Cedrus atlantica Glauca Fastigata', int4range(40,60), int4range(25,35), 6, false, false, 'very high', 'moderate', 'evergreen', 'low', 'high', 'low', ARRAY['Bluish foliage'], false, false, true, true),
+    (26, 'Flamegold', 'Koelreuteria elegans', int4range(40,60), int4range(35,45), 6, false, false, 'high', 'fast', 'semi-evergreen', 'moderate', 'moderate', 'low', ARRAY['Flowers'], false, false, true, false),
+    (27, 'Ghost gum', 'Carymbia aparrerinja', int4range(50,70), int4range(30,40), 6, false, false, 'very high', 'fast', 'evergreen', 'moderate', 'high', 'low', ARRAY['Bluish foliage'], true, true, true, false),
+    (28, 'Gold medallion tree', 'Cassia lepyophylla', int4range(15,25), int4range(20,35), 3, true, false, 'high', 'slow', 'evergreen', 'moderate', 'low', 'moderate', ARRAY['Flowers'], false, false, true, false),
+    (29, 'Hollywood juniper', 'Juniperus chinensis Torulosa', int4range(20,30), int4range(10,30), 3, true, false, 'very high', 'slow', 'evergreen', 'low', 'low', 'moderate', ARRAY['Structure'], true, true, true, true),
+    (30, 'Island oak', 'Quercus tomentella', int4range(40,70), int4range(30,50), 5, false, false, 'high', 'moderate', 'evergreen', 'low acorn potential', 'moderate', 'high', ARRAY['Foliage'], false, true, true, true),
+    (31, 'Jelecote pine', 'Pinus patula', int4range(40,60), int4range(35,60), 6, false, false, 'high', 'fast', 'evergreen', 'low', 'high', 'low', ARRAY['Foliage, bark'], false, false, true, true),
+    (32, 'King palm', 'Achontophoenix cunninghamiana', int4range(35,60), int4range(10,20), 3, false, false, 'high', 'moderate', 'evergreen', 'moderate', 'low', 'high', ARRAY['Form, flowers'], false, true, true, false),
+    (33, 'Lemon-scented gum', 'Carymbia citriodora', int4range(60,80), int4range(20,30), 6, false, false, 'high', 'fast', 'evergreen', 'low', 'moderate', 'moderate', ARRAY['Bark, structure'], false, true, true, false),
+    (34, 'Macadamia', 'Macadamia integrifolia', int4range(25,35), int4range(20,30), 6, false, false, 'high', 'moderate', 'evergreen', 'moderate fruit production', 'moderate', 'low', ARRAY['Foliage, fruit'], false, true, true, false),
+    (35, 'Macdeonian oak', 'Quercus trojana', int4range(25,35), int4range(20,30), 4, false, false, 'high', 'moderate', 'deciduous', 'low, some acorns', 'low', 'low', ARRAY['Structure, fall color'], false, false, false, true),
+    (36, 'Marina madrone', 'Arbutus Marina', int4range(20,40), int4range(20,30), 4, false, false, 'moderate', 'moderate', 'evergreen', 'moderate fruit drop', 'low', 'high', ARRAY['Bark, foliage, fruit'], false, true, true, true),
+    (37, 'Mexican blue oak', 'Queurcus ablongifolia', int4range(40,60), int4range(30,80), 5, false, false, 'high', 'moderate', 'evergreen', 'low acorn potential', 'moderate', 'low', ARRAY['Bluish foliage'], false, false, true, true),
+    (38, 'Mexican red oak', 'Quercus canbyi', int4range(35,50), int4range(25,45), 5, false, false, 'moderate', 'fast', 'semi-evergreen', 'low acorn potential', 'moderate', 'low', ARRAY['Winter color'], false, false, true, false),
+    (39, 'Mount Lemmon super gambel oak', 'Quercus gambelli hybrid', int4range(35,60), int4range(25,40), 5, false, false, 'high', 'moderate', 'deciduous', 'moderate acorn potential', 'moderate', 'moderate', ARRAY['Fall color, foliage'], false, false, true, true),
+    (40, 'Netleaf oak', 'Quercus rugosa', int4range(40,70), int4range(25,45), 5, false, false, 'high', 'fast', 'evergreen', 'high acorn potential', 'moderate', 'moderate', ARRAY['New growth, foliage'], false, true, true, false),
+    (41, 'New Zealand Christmas tree/Pohutukawa', 'Metrosideros exceisa', int4range(30,40), int4range(25,40), 6, false, false, 'high', 'moderate', 'evergreen', 'low', 'high', 'high', ARRAY['Flowers, foliage'], true, true, true, false),
+    (42, 'Olive, Swan Hill (single stem)', 'Olea Swan Hill', int4range(20,30), int4range(25,35), 6, true, false, 'high', 'moderate', 'evergreen', 'low (proven fruitless variety)', 'high', 'high', ARRAY['Structure, foliage'], false, true, true, true),
+    (43, 'Pink trumpet tree', 'Handroanthus heptaphyilus', int4range(15,25), int4range(20,30), 4, true, false, 'high', 'moderate', 'semi-evergreen', 'low', 'low', 'moderate', ARRAY['Flowers'], false, false, true, true),
+    (44, 'Pyrenees oak', 'Quercus pyrenaica', int4range(40,60), int4range(30,50), 5, false, false, 'high', 'moderate', 'deciduous', 'moderate acorn potential', 'high', 'low', ARRAY['Fall color'], false, false, true, true),
+    (45, 'Red flowering gum', 'Carymbia ficifolia', int4range(25,40), int4range(30,50), 6, false, false, 'very high', 'fast', 'evergreen', 'high', 'high', 'low', ARRAY['Flowers'], false, true, true, false),
+    (46, 'Red Push pistache', 'Pistacia x Red Push', int4range(30,50), int4range(30,50), 5, false, false, 'very high', 'moderate', 'semi-evergreen', 'low', 'moderate', 'moderate', ARRAY['New growth coloration'], false, false, true, true),
+    (47, 'Roberts California sycamore', 'Platanus racemosa Roberts', int4range(50,90), int4range(30,60), 6, false, true, 'moderate', 'very fast', 'deciduous', 'moderate', 'high', 'low', ARRAY['Bark, structure'], false, false, true, false),
+    (48, 'Rusty leaf fig', 'FIcus rubidginosa', int4range(30,50), int4range(25,50), 8, false, false, 'high', 'fast', 'evergreen', 'low', 'high', 'moderate', ARRAY['foliage'], false, true, true, false),
+    (49, 'Sartors oak', 'Quercus sartorii', int4range(35,60), int4range(25,45), 5, false, false, 'moderate', 'fast', 'evergreen', 'low acorn potential', 'moderate', 'low', ARRAY['Foliage'], false, false, true, false),
+    (50, 'Shangtung maple', 'Acer truncatum', int4range(10,20), int4range(15,20), 3, true, false, 'high', 'slow', 'deciduous', 'low', 'low', 'low', ARRAY['Fall color'], false, false, true, false),
+    (51, 'Silver dollar gum', 'Eucalyptus polyanthemos', int4range(60,80), int4range(40,50), 6, false, false, 'very high', 'very fast', 'evergreen', 'moderate', 'high', 'low', ARRAY['Bluish foliage'], true, true, true, false),
+    (52, 'Silverleaf oak', 'Quercus hypoleucoides', int4range(30,60), int4range(20,40), 5, false, false, 'high', 'moderate', 'evergreen', 'low acorn potential', 'low', 'moderate', ARRAY['Bicolor foliage'], false, false, true, true),
+    (53, 'Soapbark tree', 'Quilaja saponaria', int4range(40,60), int4range(25,35), 4, false, false, 'moderate', 'moderate', 'evergreen', 'low', 'low', 'low', ARRAY['Structure, foliage'], false, false, true, true),
+    (54, 'Southern live oak', 'Quercus virginiana', int4range(30,50), int4range(40,80), 6, false, false, 'high', 'moderate', 'semi-evergreen', 'low acorn potential', 'high', 'high', ARRAY['Structure, foliage'], false, true, true, false),
+    (55, 'Swamp malee', 'Eucalyptus spathulata', int4range(20,40), int4range(25,35), 5, false, false, 'very high', 'moderate', 'evergreen', 'low', 'low', 'moderate', ARRAY['Bark, structure'], true, true, true, false),
+    (56, 'Sweet hakea', 'Hakea drupacea', int4range(15,20), int4range(15,25), 3, true, false, 'very high', 'slow', 'evergreen', 'low', 'low', 'low', ARRAY['Foliage, flowers'], true, true, true, false),
+    (57, 'Sydney red gum', 'Angophora costata', int4range(50,70), int4range(40,60), 6, false, false, 'high', 'fast', 'evergreen', 'moderate', 'high', 'moderate', ARRAY['Structure, bark'], true, true, true, false),
+    (58, 'Torrey Pine', 'Pinus torreyana', int4range(60,120), int4range(40,90), 6, false, true, 'very high', 'very fast', 'evergreen', 'big cones', 'high', 'moderate', ARRAY['Bluish foliage'], false, true, true, true),
+    (59, 'Torreys hybrid oak', 'Quercus acutidens', int4range(15,25), int4range(15,35), 4, true, true, 'high', 'slow', 'evergreen', 'low acorn potential', 'low', 'low', ARRAY['Structure'], false, false, true, true),
+    (60, 'Toyon, Davis Gold', 'Heteromeles arbutifolia Davis Gold', int4range(10,30), int4range(10,20), 3, true, true, 'high', 'moderate', 'evergreen', 'berries', 'low', 'low', ARRAY['Yellow berries'], false, false, false, true),
+    (61, 'Trident maple', 'Acer buergerianum', int4range(20,25), int4range(15,25), 4, true, false, 'moderate', 'slow', 'deciduous', 'low', 'low', 'moderate', ARRAY['Fall color, bark'], false, false, true, false),
+    (62, 'Water gum', 'Tristaniopsis laurina', int4range(10,30), int4range(10,25), 3, true, false, 'moderate', 'slow', 'evergreen', 'low', 'low', 'high', ARRAY['Bark, foliage'], false, false, true, true),
+    (63, 'Weeping fig', 'Ficus benjamina', int4range(25,30), int4range(15,25), 6, true, false, 'high', 'fast', 'evergreen', 'low', 'moderate', 'moderate', ARRAY['Growth, habit'], false, true, true, false),
+    (64, 'WestMax red oak', 'Qercus albocinta', int4range(25,40), int4range(20,35), 5, false, false, 'high', 'moderate', 'evergreen', 'low acorn potential', 'moderate', 'low', ARRAY['Foliage'], false, false, true, true)
 ;
 
-INSERT INTO tree_requests (id, resident_id, submission_timestamp, tree_id, site_description, approved);
+INSERT INTO tree_requests (id, resident_id, submission_timestamp, tree_id, site_description, approved)
+VALUES
+    (1, 3, , 42, '', false),
+    (2, 4, , 55, '', true),
+    (3, 5, , 12, '', true),
+    (4, 6, , 64, '', true),
+    (5, 8, , 9, '', true),
+    (6, 4, , 11, '', true),
+    (7, 4, , 36, '', true),
+    (8, 4, , '', true),
+    (9, 4, , 12, '', false),
+    (10, 4, , 1, '', false)
+;
 
-INSERT INTO permits (resident_id, tree_request_id, status, approval_date);
+INSERT INTO permits (resident_id, tree_request_id, status, approval_date)
+VALUES
+    (4, 2, 'approved', 7/5/2024)
+;
 
 INSERT INTO scheduled_events (event_id, event_timestamp, cancelled, notes);
 
