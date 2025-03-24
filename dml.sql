@@ -167,8 +167,112 @@ VALUES
     (3, 'Matthew', 'Shi', 'shi.mat@northeastern.edu', 'vintage1092', '1506 Linden Street', 94607, true, 'Oak Center'),
     (4, 'Ashwin', 'Iyer', 'iyer.ashw@northeastern.edu', 'minne2311', '2281 E 10th Street', 94601, true, 'Prescott'),
     (5, 'Baoren', 'Liu', 'liu.baor@northeastern.edu', 'kansl1865', '5567 Carlton Street', 94618, true, 'Rockridge'),
-    (6, 'Jordan', 'Pinnick', 'pinnick.j@northeastern.edu', 'hello2F4', '85 Glen Avenue', 94611, true, 'Piedmont Avenue'),
-    (7, 'Jordan', 'Pinnick', 'pinnick.j@northeastern.edu', 'hello2F4', '3873 Rhoda Avenue', 94602, false, 'Upper Dimond'),
-    (8, 'Jordan', 'Pinnick', 'pinnick.j@northeastern.edu', 'hello2F4', '7945 Sunkist Drive', 94605, true, 'Eastmont Hills'),
-    (9, 'Jordan', 'Pinnick', 'pinnick.j@northeastern.edu', 'hello2F4', '7616 Weld Street', 94621, false, 'Arroyo Viejo'),
-    (10, 'Jordan', 'Pinnick', 'pinnick.j@northeastern.edu', 'hello2F4', '1306 31st Avenue', 94601, false, 'Fruitvale')
+    (6, 'John', 'Smith', 'js@gmail.com', 'nmD782', '85 Glen Avenue', 94611, true, 'Piedmont Avenue'),
+    (7, 'Ashley', 'White', 'ash.w3928.j@gmail.com', 'l26973f', '3873 Rhoda Avenue', 94602, false, 'Upper Dimond'),
+    (8, 'Lily', 'Green', 'lilygreenhappy@yahoo.com', 'vdF43fg', '7945 Sunkist Drive', 94605, true, 'Eastmont Hills'),
+    (9, 'Ella', 'Li', 'eli5@gmail.com', 'uimvl29', '7616 Weld Street', 94621, false, 'Arroyo Viejo'),
+    (10, 'Aaron', 'Williams', 'will.aaron@gmail.com', '38572ab', '1306 31st Avenue', 94601, false, 'Fruitvale')
+
+INSERT INTO organization_members (resident_id, role, start_date)
+VALUES
+    ()
+;
+
+INSERT INTO volunteer_applications (resident_id, created, approved, notes)
+VALUES
+    (3, 4/24/2023, true, 'Has fertilizer to bring'),
+    (4, 2/12/2023, true, 'Can drive multiple volunteers'),
+    (5, 7/9/2024, true, 'Can supply additional shovels'),
+    (6, 12/8/2023, true, ''),
+    (7, 6/1/2022, false, ''),
+    (8, 8/9/2023, true, ''),
+    (9, 11/4/2024, false, '')
+;
+
+INSERT INTO trees (id, common_name, scientific_name, height_range, width_range, minimum_planting_bed_width, plantable_under_power_lines, native_to_ca, drought_tolerance, growth_rate, foliage_type, debris, root_damage_potential, nursery_availability, visual_attraction, pzharshsites, pzbay, pzurbanized, pznearnaturalareas)
+VALUES
+    (1, 'African fern pine', 'Afrocarpus graciliar', int4range(40-60), int4range(25-35), 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (2, 'Aleppo oak', 'Quercus boissieri', int4range(30-40), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (3, 'Atlas cedar', 'Cedrus atlantica', int4range(60-100), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (4, 'Brisbane box', 'Lophostemon confertus', int4range(40-60), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (5, 'Bronze loquat', 'Eriobotrya deflexa', int4range(15-25), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (6, 'Cajeput tree', 'Melaleuca quinquenervia', int4range(20-35), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (7, 'California buckeye', 'Aesculus caliornica', int4range(20-30), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (8, 'Canary Island pine', 'Pinus canariensis', int4range(60-100), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (9, 'Catalina cherry', 'Prunus lyanii', int4range(15-30), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (10, 'Chestnut leaf oak', 'Quercus castaneifolia', int4range(50-100), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (11, 'Chinese pistache', 'Pistacia chinesis', int4range(30-40), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (12, 'Chisos red oak', 'Quercus gravesii', int4range(25-35), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (13, 'Coast live oak', 'Quercus agrifolia', int4range(40-80), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (14, 'Compact strawberry tree', 'Arbutus unedo Compacta', int4range(10-20), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (15, 'Compton oak', 'Quercus x comptaniae', int4range(40-60), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (16, 'Cork oak', 'Quercus suber', int4range(40-80), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (17, 'Crape myrtle, Choctaw', 'Lagerstroemia Choctaw', int4range(15-25), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (18, 'Crape myrtle, muskogee', 'Lagerstroemia Muskogee', int4range(15-25), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (19, 'Crape myrtle, natchez', 'Lagerstroemia Natchez', int4range(20-30), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (20, 'Crape myrtle, tuscarora', 'Lagerstroemia Tuscarora', int4range(15-20), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (21, 'Encino tezahuatl', 'Quercus mexicana', int4range(40-60), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (22, 'Engelmann oak', 'Quercus engelmannii', int4range(40-80), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (23, 'Escarpment oak', 'Quercus fusiformis', int4range(40-60), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (24, 'Evergreen maple', 'Acer paxii', int4range(30-40), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (25, 'Fastigate blue atlas cedar', 'Cedrus atlantica Glauca Fastigata', int4range(40-60), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (26, 'Flamegold', 'Koelreuteria elegans', int4range(40-60), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (27, 'Ghost gum', 'Carymbia aparrerinja', int4range(50-70), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (28, 'Gold medallion tree', 'Cassia lepyophylla', int4range(15-25), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (29, 'Hollywood juniper', 'Juniperus chinensis Torulosa', int4range(20-30), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (30, 'Island oak', 'Quercus tomentella', int4range(40-70), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (31, 'Jelecote pine', 'Pinus patula', int4range(40-60), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (32, 'King palm', 'Achontophoenix cunninghamiana', int4range(35-60), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (33, 'Lemon-scented gum', 'Carymbia citriodora', int4range(60-80), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (34, 'Macadamia', 'Macadamia integrifolia', int4range(25-35), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (35, 'Macdeonian oak', 'Quercus trojana', int4range(25-35), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (36, 'Marina madrone', 'Arbutus Marina', int4range(20-40), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (37, 'Mexican blue oak', 'Queurcus ablongifolia', int4range(40-60), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (38, 'Mexican red oak', 'Quercus canbyi', int4range(35-60), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (39, 'Mount Lemmon super gambel oak', 'Quercus gambelli hybrid', int4range(35-50), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (40, 'Netleaf oak', 'Quercus rugosa', int4range(40-70), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (41, 'New Zealand Christmas tree/Pohutukawa', 'Metrosideros exceisa', int4range(40-70), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (42, 'Olive, Swan Hill (single stem)', 'Olea Swan Hill', int4range(20-30), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (43, 'Pink trumpet tree', 'Handroanthus heptaphyilus', int4range(15-25), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (44, 'Pyrenees oak', 'Quercus pyrenaica', int4range(40-60), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (45, 'Red flowering gum', 'Carymbia ficifolia', int4range(25-40), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (46, 'Red Push pistache', 'Pistacia x Red Push', int4range(30-50), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (47, 'Roberts California sycamore', 'Platanus racemosa Roberts', int4range(50-90), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (48, 'Rusty leaf fig', 'FIcus rubidginosa', int4range(30-50), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (49, 'Sartors oak', 'Quercus sartorii', int4range(35-60), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (50, 'Shangtung maple', 'Acer truncatum', int4range(10-20), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (51, 'Silver dollar gum', 'Eucalyptus polyanthemos', int4range(60-80), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (52, 'Silverleaf oak', 'Quercus hypoleucoides', int4range(30-60), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (53, 'Soapbark tree', 'Quilaja saponaria', int4range(40-60), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (54, 'Southern live oak', 'Quercus virginiana', int4range(30-50), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (55, 'Swamp malee', 'Eucalyptus spathulata', int4range(20-40), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (56, 'Sweet hakea', 'Hakea drupacea', int4range(15-20), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (57, 'Sydney red gum', 'Angophora costata', int4range(50-70), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (58, 'Torrey Pine', 'Pinus torreyana', int4range(60-120), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (59, 'Torreys hybrid oak', 'Quercus acutidens', int4range(15-25), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (60, 'Toyon, Davis Gold', 'Heteromeles arbutifolia Davis Gold', int4range(10-30), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (61, 'Trident maple', 'Acer buergerianum', int4range(20-25), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (62, 'Water gum', 'Tristaniopsis laurina', int4range(10-30), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (63, 'Weeping fig', 'Ficus benjamina', int4range(25-30), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+    (64, 'WestMax red oak', 'Qercus albocinta', int4range(25-40), '25-35', 5, false, false, 'high', 'moderate', 'evergreen', 'low', 'moderate', 'high', 'Green screen', false, false, true, true),
+;
+
+INSERT INTO tree_requests (id, resident_id, submission_timestamp, tree_id, site_description, approved);
+
+INSERT INTO permits (resident_id, tree_request_id, status, approval_date);
+
+INSERT INTO scheduled_events (event_id, event_timestamp, cancelled, notes);
+
+INSERT INTO scheduled_plantings (event_id, event_timestamp, cancelled, notes);
+
+INSERT INTO scheduled_visits (event_id, event_timestamp, cancelled, notes, organization_member_id);
+
+INSERT INTO visit_events (scheduled_visit_id, observations, photo_library_link, additional_visit_required) ;
+
+INSERT INTO planting_events (scheduled_planting_id, observations, before_photos_library_link, after_photos_library_link, successful);
+
+INSERT INTO organization_members_lead_planting_events (organization_member_id, planting_event_id);
+
+INSERT INTO scheduled_plantings_have_volunteers (planting_event_id, volunteer_id);
+
+INSERT INTO planting_events_have_volunteers (planting_event_id, volunteer_id);

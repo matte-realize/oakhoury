@@ -33,6 +33,7 @@ CREATE TYPE tolerance AS ENUM ('moderate', 'high', 'very high');
 CREATE TYPE rate AS ENUM ('slow', 'moderate', 'fast', 'very fast');
 CREATE TYPE foliage AS ENUM ('deciduous', 'evergreen', 'semi-evergreen', 'late-deciduous');
 CREATE TYPE root_damage AS ENUM ('low', 'moderate', 'high');
+CREATE TYPE nursery_availability AS ENUM ('low', 'moderate', 'high');
 CREATE TABLE trees (
     id serial primary key,
     common_name varchar(100) unique,
@@ -47,6 +48,7 @@ CREATE TABLE trees (
     foliage_type foliage,
     debris varchar(50),
     root_damage_potential root_damage,
+    nursery_availability nursery,
     visual_attraction varchar(20)[],
     pZHarshSites boolean,
     pZBay boolean,
