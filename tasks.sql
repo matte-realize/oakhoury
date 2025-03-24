@@ -102,4 +102,4 @@ VALUES (
 -- Update the inventory for a tree
 UPDATE trees
 SET inventory = :inventory
-WHERE id = :id
+WHERE id = :id;
