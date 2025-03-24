@@ -53,7 +53,8 @@ CREATE TABLE trees (
     pZHarshSites boolean,
     pZBay boolean,
     pZUrbanized boolean,
-    pZNearNaturalAreas boolean
+    pZNearNaturalAreas boolean,
+    inventory integer check(inventory >= 0)
 );
 
 CREATE TABLE tree_requests (
