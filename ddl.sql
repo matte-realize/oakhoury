@@ -97,7 +97,7 @@ CREATE TABLE scheduled_visits (
 CREATE TABLE visit_events (
     scheduled_visit_id integer primary key references scheduled_plantings(event_id),
     observations text,
-    photo_library_link varchar(50),
+    photo_library_link varchar(100),
     additional_visit_required boolean
 );
 
