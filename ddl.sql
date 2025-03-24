@@ -54,7 +54,7 @@ CREATE TABLE trees (
     pZBay boolean,
     pZUrbanized boolean,
     pZNearNaturalAreas boolean,
-    inventory integer
+    inventory integer check(inventory >= 0)
 );
 
 CREATE TABLE tree_requests (
