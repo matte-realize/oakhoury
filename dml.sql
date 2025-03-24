@@ -160,11 +160,7 @@ VALUES
     ('Woodminster')
 ;
 
-<<<<<<< HEAD
-INSERT INTO residents (first_name, last_name, email, password, street, zipCode, is_volunteer, neighborhood)
-=======
-INSERT INTO residents (id, first_name, last_name, email, password, street, zip_code, is_volunteer, neighborhood)
->>>>>>> 2c0ba31 (Fix 'zip_code' casing & add check)
+INSERT INTO residents (first_name, last_name, email, password, street, zip_code, is_volunteer, neighborhood)
 VALUES
     ('Jordan', 'Pinnick', 'pinnick.j@northeastern.edu', 'hello2F4', '5000 MacArthur Blvd', 94613, false, 'Mills College'),
     ('Devan', 'Kumar', 'kumar.deva@northeastern.edu', 'miss27ouri', '4341 Davis Street', 94601, false, 'Harrington'),
