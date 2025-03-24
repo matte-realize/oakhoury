@@ -48,7 +48,7 @@ CREATE TABLE trees (
     foliage_type foliage,
     debris varchar(50),
     root_damage_potential root_damage,
-    nursery_availability nursery,
+    nursery_availability nursery_availability,
     visual_attraction varchar(20)[],
     pZHarshSites boolean,
     pZBay boolean,
