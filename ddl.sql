@@ -1,8 +1,5 @@
 -- Creates tables in Postgres v.17.4
 
--- DROP TABLE neighborhoods;
--- DROP TABLE residents;
-
 CREATE TABLE neighborhoods (
     name varchar(100) primary key
 );
@@ -57,3 +54,75 @@ CREATE TABLE trees (
     pZNearNaturalAreas boolean
 );
 
+CREATE TABLE tree_requests (
+    id serial primary key,
+    resident_id integer references residents(id),
+    submission_timestamp timestamp,
+    tree_id integer references trees(id),
+    site_description text,
+    approved boolean,
+    unique(resident_id, submission_timestamp)
+);
+
+CREATE TYPE status AS ENUM ('pending', 'approved', 'denied');
+CREATE TABLE permits (
+    resident_id integer references residents(id),
+    tree_request_id integer references tree_requests(id),
+    status status,
+    approval_date date,
+    PRIMARY KEY(resident_id, tree_request_id)
+);
+
+-- Abstract table to hold scheduled_events
+CREATE TABLE scheduled_events (
+    event_id serial primary key,
+    event_timestamp timestamp,
+    cancelled boolean,
+    notes text
+);
+
+CREATE TABLE scheduled_plantings (
+    -- inherits all from scheduled_events
+    primary key (event_id)
+) inherits (scheduled_events);
+
+
+CREATE TABLE scheduled_visits (
+    organization_member_id integer references organization_members(resident_id),
+    primary key (event_id)
+) inherits (scheduled_events);
+
+CREATE TABLE visit_events (
+    scheduled_visit_id integer primary key references scheduled_plantings(event_id),
+    observations text,
+    photo_library_link varchar(50),
+    additional_visit_required boolean
+);
+
+CREATE TABLE planting_events (
+    scheduled_planting_id integer primary key references scheduled_visits(event_id),
+    observations text,
+    before_photos_library_link varchar(100),
+    after_photos_library_link varchar(100),
+    successful boolean
+);
+
+-- junction tables
+
+CREATE TABLE organization_members_lead_planting_events (
+    organization_member_id integer references organization_members(resident_id),
+    planting_event_id integer references planting_events(scheduled_planting_id),
+    primary key(organization_member_id, planting_event_id)
+);
+
+CREATE TABLE scheduled_plantings_have_volunteers (
+    planting_event_id integer references scheduled_plantings(event_id),
+    volunteer_id integer references residents(id),
+    primary key(planting_event_id, volunteer_id)
+);
+
+CREATE TABLE planting_events_have_volunteers (
+    planting_event_id integer references planting_events(scheduled_planting_id),
+    volunteer_id integer references residents(id),
+    primary key(planting_event_id,  volunteer_id)
+);
