@@ -11,7 +11,7 @@ CREATE TABLE residents (
     email varchar(100) unique not null,
     password varchar(50),
     street varchar(50),
-    zipCode char(5),
+    zip_code char(5) CHECK(zip_code > 0),
     is_volunteer boolean,
     neighborhood varchar(100) references neighborhoods(name)
 );
