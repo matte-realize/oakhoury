@@ -1,5 +1,5 @@
 -- Registering a new user
-INSERT INTO residents (first_name, last_name, email, password, street, zipCode, is_volunteer, neighborhood)
+INSERT INTO residents (first_name, last_name, email, password, street, zip_code, is_volunteer, neighborhood)
     VALUES (
     :first_name,
     :last_name,
