@@ -160,7 +160,7 @@ VALUES
     ('Woodminster')
 ;
 
-INSERT INTO residents (first_name, last_name, email, password, street, zipCode, is_volunteer, neighborhood)
+INSERT INTO residents (first_name, last_name, email, password, street, zip_code, is_volunteer, neighborhood)
 VALUES
     ('Jordan', 'Pinnick', 'pinnick.j@northeastern.edu', 'hello2F4', '5000 MacArthur Blvd', 94613, false, 'Mills College'),
     ('Devan', 'Kumar', 'kumar.deva@northeastern.edu', 'miss27ouri', '4341 Davis Street', 94601, false, 'Harrington'),
@@ -197,7 +197,7 @@ VALUES
     (3, 4/24/2023, true, 'Has fertilizer to bring'),
     (4, 2/12/2023, true, 'Can drive multiple volunteers'),
     (5, 7/9/2024, true, 'Can supply additional shovels'),
-    (6, 12/8/2023, true, ''),
+    (6, 12/8/2023, true, 'Is able to transport the tree to its location'),
     (7, 6/1/2022, false, ''),
     (8, 8/9/2023, true, ''),
     (9, 11/4/2024, false, ''),
@@ -276,16 +276,16 @@ VALUES
 
 INSERT INTO tree_requests (resident_id, submission_timestamp, tree_id, site_description, approved)
 VALUES
-    (3, , 42, '', false),
-    (4, , 55, '', true),
-    ( 5, , 12, '', true),
-    ( 6, , 64, '', true),
-    ( 8, , 9, '', true),
-    (9, , 11, '', true),
-    (14, , 36, '', true),
-    (15, , '', true),
-    ( , , 12, '', false),
-    ( , , 1, '', false)
+    (3, '2024-07-03 07:04:06', 42, '', false),
+    (4, '2024-08-31 21:15:49', 55, '', true),
+    ( 5, '2024-12-08 15:46:12', 12, '', true),
+    ( 6, '2023-12-10 11:21:54', 64, '', true),
+    ( 8, '2023-10-11 04:06:38', 9, '', true),
+    (9, '2024-07-02 01:02:03', 11, '', true),
+    (14, '2025-01-01 12:34:21', 36, '', true),
+    (15, '2024-06-22 07:12:45', 11, '', false),
+    ( 21, '2024-04-12 17:23:30', 12, '', false),
+    ( 7, '2024-10-03 07:06:28', 1, '', false)
 ;
 
 INSERT INTO permits (resident_id, tree_request_id, status, approval_date)
@@ -293,12 +293,13 @@ VALUES
     (3, 1, 'denied', 7/5/2024),
     (4, 2, 'approved', 9/9/2024),
     (5, 3, 'approved', 1/3/2025),
-    (6, 4, 'approved', 1/7/2025),
-    (8, 5, 'approved', 2/2/2025),
+    (6, 4, 'approved', 1/7/2024),
+    (8, 5, 'approved', 2/2/2024),
     (9, 6, 'approved', 7/5/2024),
     (14, 7, 'denied', 1/3/2025),
-    (15, 8, 'pending', ?)
-
+    (15, 8, 'pending', ?),
+    (21, 9, 'pending', ?),
+    (7, 10, 'denied', 3/12/2025)
 ;
 
 INSERT INTO scheduled_events (event_timestamp, cancelled, notes)
