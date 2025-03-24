@@ -171,18 +171,18 @@ VALUES
     (7, 'Ashley', 'White', 'ash.w3928.j@gmail.com', 'l26973f', '3873 Rhoda Avenue', 94602, false, 'Upper Dimond'),
     (8, 'Lily', 'Green', 'lilygreenhappy@yahoo.com', 'vdF43fg', '7945 Sunkist Drive', 94605, true, 'Eastmont Hills'),
     (9, 'Ella', 'Li', 'eli5@gmail.com', 'uimvl29', '7616 Weld Street', 94621, false, 'Arroyo Viejo'),
-    (10, 'Aaron', 'Williams', 'will.aaron@gmail.com', '38572ab', '1306 31st Avenue', 94601, false, 'Fruitvale')
-    (11, 'Henry', 'Cage', 'henryc@outlook.com', 'nmfgh347', '' , , false, ''),
-    (12, 'Tracy', 'Kemp', 'tracy020@gmail.com', 'gfdidij28', '', , false, ''),
-    (13, 'Tracy', 'Haynes', 'haytray930@gmail.com', 'bhgv23', '', , false, ''),
-    (14, 'Drew', 'Glenn', 'dgdg@outlook.com', '4324mdf', '', , true, ''),
-    (15, 'April', 'Cain', '4c4c@gmail.com', '544ffd', '', , true, ''),
-    (16, 'Jasper', 'Ruiz', 'jasperRRRR@gmail.com', '09876fdgf', '', , true, ''),
-    (17, 'Holden', 'Schmitt', 'schold@gmail.com', 'lmaj289', '', , true, ''),
-    (18, 'Allen', 'Bell', 'bell.allen@outlook.com', 'happy2839', '', , true, ''),
-    (19, 'Raymond', 'Bell', 'raymond.bell@gmail.com', 'cake23672', '', , true, ''),
-    (20, 'Harvey', 'Choi', 'imharvey@yahoo.com', '3827352', '', , true, ''),
-    (21, 'Savanna', 'Jackson', 'savajack@gmail.com', 'abcdefghij', '', , true, '')
+    (10, 'Aaron', 'Williams', 'will.aaron@gmail.com', '38572ab', '1306 31st Avenue', 94601, false, 'Fruitvale'),
+    (11, 'Henry', 'Cage', 'henryc@outlook.com', 'nmfgh347', '3813 Clarke Street' , 94609, false, 'Mosswood'),
+    (12, 'Tracy', 'Kemp', 'tracy020@gmail.com', 'gfdidij28', '4435 Shafter Avenue', 94609, false, 'Temescal'),
+    (13, 'Tracy', 'Haynes', 'haytray930@gmail.com', 'bhgv23', '5705 Genoa Street', 94608, false, 'Santa Fe'),
+    (14, 'Drew', 'Glenn', 'dgdg@outlook.com', '4324mdf', '1099 Mandana Boulevard', 94610, true, 'Crocker Highlands'),
+    (15, 'April', 'Cain', '4c4c@gmail.com', '544ffd', '3266 Louise Street', 94608, true, 'Clawson'),
+    (16, 'Jasper', 'Ruiz', 'jasperRRRR@gmail.com', '09876fdgf', '2020 E 15th Street', 94606, true, 'Rancho San Antonio'),
+    (17, 'Holden', 'Schmitt', 'schold@gmail.com', 'lmaj289', '1137 65th Avenue', 94621, true, 'Lockwood-Tevis'),
+    (18, 'Allen', 'Bell', 'bell.allen@outlook.com', 'happy2839', '9501 Granada Avenue', 94605, true, 'Oak Knoll'),
+    (19, 'Raymond', 'Bell', 'raymond.bell@gmail.com', 'cake23672', '1244 51st Avenue', 94601, true, 'Melorse'),
+    (20, 'Harvey', 'Choi', 'imharvey@yahoo.com', '3827352', '2344 90th Avenue', 94603, true, 'Castlemont'),
+    (21, 'Savanna', 'Jackson', 'savajack@gmail.com', 'abcdefghij', '9867 Lawlor Street', 94605, true, 'Toler Heights')
 ;
 
 INSERT INTO organization_members (resident_id, role, start_date)
@@ -281,16 +281,24 @@ VALUES
     (3, 5, , 12, '', true),
     (4, 6, , 64, '', true),
     (5, 8, , 9, '', true),
-    (6, 4, , 11, '', true),
-    (7, 4, , 36, '', true),
-    (8, 4, , '', true),
-    (9, 4, , 12, '', false),
-    (10, 4, , 1, '', false)
+    (6, 9, , 11, '', true),
+    (7, 14, , 36, '', true),
+    (8, 15, , '', true),
+    (9, , , 12, '', false),
+    (10, , , 1, '', false)
 ;
 
 INSERT INTO permits (resident_id, tree_request_id, status, approval_date)
 VALUES
-    (4, 2, 'approved', 7/5/2024)
+    (3, 1, 'denied', 7/5/2024),
+    (4, 2, 'approved', 9/9/2024),
+    (5, 3, 'approved', 1/3/2025),
+    (6, 4, 'approved', 1/7/2025),
+    (8, 5, 'approved', 2/2/2025),
+    (9, 6, 'approved', 7/5/2024),
+    (14, 7, 'denied', 1/3/2025),
+    (15, 8, 'pending', ?),
+
 ;
 
 INSERT INTO scheduled_events (event_id, event_timestamp, cancelled, notes);
