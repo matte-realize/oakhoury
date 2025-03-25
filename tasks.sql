@@ -114,7 +114,8 @@ WHERE
 -- Get the status of a tree
 -- https://neon.tech/postgresql/postgresql-plpgsql/postgresql-create-function
 CREATE OR REPLACE FUNCTION get_tree_request_status(p_tree_request_id INTEGER)
-    RETURNS TEXT AS
+    RETURNS TEXT
+AS
 $$
 DECLARE
     v_status TEXT;
@@ -183,6 +184,60 @@ GROUP BY t.common_name;
 -- trees were planted: the number of years since the first tree of the species was planted, the
 -- number of years since the most recent tree of the species was planted. In addition, include the
 -- year that had the most trees of the species planted and the number of trees planted.
+-- https://www.scaler.com/topics/datediff-in-postgresql/
+WITH
+    years_with_most_planted AS (SELECT
+                                    t.id,
+                                    EXTRACT(YEAR FROM sp.event_timestamp::DATE) AS year_planted
+                                FROM
+                                    trees t
+                                        JOIN tree_requests tr
+                                             ON t.id = tr.tree_id
+                                        JOIN scheduled_plantings sp
+                                             ON tr.id = sp.tree_request_id
+                                        JOIN planting_events pe
+                                             ON sp.event_id = pe.scheduled_planting_id
+                                WHERE
+                                    pe.successful = TRUE
+                                GROUP BY t.id, sp.event_timestamp),
+    number_of_planted_for_peak_year AS (SELECT
+                                            t.id,
+                                            COUNT(*) AS count
+                                        FROM
+                                            trees t
+                                                JOIN tree_requests tr
+                                                     ON t.id = tr.tree_id
+                                                JOIN scheduled_plantings sp
+                                                     ON tr.id = sp.tree_request_id
+                                                JOIN planting_events pe
+                                                     ON sp.event_id = pe.scheduled_planting_id
+                                                JOIN years_with_most_planted ymp
+                                                     ON t.id = ymp.id
+                                        WHERE
+                                              pe.successful = TRUE
+                                          AND EXTRACT(YEAR FROM sp.event_timestamp::DATE) = ymp.year_planted
+                                        GROUP BY t.id)
+SELECT
+    t.common_name,
+    COUNT(tr.id)                                                                       AS number_of_trees_planted,
+    MIN(EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM sp.event_timestamp::DATE)) AS years_since_planting,
+    ymp.year_planted,
+    nppy.count
+FROM
+    trees t
+        JOIN tree_requests tr
+             ON t.id = tr.tree_id
+        JOIN scheduled_plantings sp
+             ON tr.id = sp.tree_request_id
+        JOIN planting_events pe
+             ON sp.event_id = pe.scheduled_planting_id
+                 AND pe.successful = TRUE
+        JOIN years_with_most_planted ymp
+             ON t.id = ymp.id
+        JOIN number_of_planted_for_peak_year nppy
+             ON t.id = nppy.id
+GROUP BY t.common_name, ymp.year_planted, nppy.count
+ORDER BY number_of_trees_planted DESC;
 
 
 -- For each Oakland neighborhood, create a report that summarizes the requests, their progress
