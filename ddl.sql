@@ -49,7 +49,7 @@ CREATE TABLE trees (
     debris varchar(50),
     root_damage_potential root_damage,
     nursery_availability nursery_availability,
-    visual_attraction varchar(20)[],
+    visual_attraction varchar(50)[],
     pZHarshSites boolean,
     pZBay boolean,
     pZUrbanized boolean,

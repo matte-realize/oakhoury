@@ -183,14 +183,17 @@ VALUES
     ('Raymond', 'Bell', 'raymond.bell@gmail.com', 'cake23672', '1244 51st Avenue', 94601, true, 'Melrose'),
     ('Harvey', 'Choi', 'imharvey@yahoo.com', '3827352', '2344 90th Avenue', 94603, true, 'Castlemont'),
     ('Savanna', 'Jackson', 'savajack@gmail.com', 'abcdefghij', '9867 Lawlor Street', 94605, true, 'Toler Heights')
-RETURNING id
 ;
 
 INSERT INTO organization_members (resident_id, role, start_date)
 VALUES
-    (1, 'administrator', '2022-1-1'),
-    (2, 'administrator', '2022-1-1'),
-    (11, 'lead planter', '2023-5-5')
+    (1, 'administrator', '2022-01-01'),
+    (2, 'administrator', '2022-01-01'),
+    (11, 'group leader', '2023-05-05'),
+    (15, 'group leader', '2024-02-04'),
+    (13, 'group leader', '2023-11-12'),
+    (18, 'group leader', '2025-01-01'),
+    (10, 'group leader', '2023-06-06')
 ;
 
 INSERT INTO volunteer_applications (resident_id, created, approved, notes)
@@ -202,9 +205,9 @@ VALUES
     (7, '2022-06-01', false, ''),
     (8, '2023-08-09', true, ''),
     (9, '2024-11-04', false, ''),
-    (14, '2024-08-11', true, 'Can drive other volunteers'),
-    (15, '2025-03-01', true, ''),
-    (21, '2025-01-05', true, '')
+    (15, '2024-08-11', true, 'Can drive other volunteers'),
+    (16, '2025-03-01', true, ''),
+    (17, '2025-01-05', true, '')
 ;
 
 INSERT INTO trees (common_name, scientific_name, height_range, width_range, minimum_planting_bed_width, plantable_under_power_lines, native_to_ca, drought_tolerance, growth_rate, foliage_type, debris, root_damage_potential, nursery_availability, visual_attraction, pzharshsites, pzbay, pzurbanized, pznearnaturalareas)
@@ -282,11 +285,11 @@ VALUES
     ( 5, '2024-12-08 15:46:12', 12, '', true),
     ( 6, '2023-12-10 11:21:54', 64, '', true),
     ( 8, '2023-10-11 04:06:38', 9, '', true),
-    (9, '2024-07-02 01:02:03', 11, '', true),
+    (20, '2024-07-02 01:02:03', 11, '', true),
     (14, '2025-01-01 12:34:21', 36, '', true),
     (15, '2024-06-22 07:12:45', 11, '', false),
     ( 21, '2024-04-12 17:23:30', 12, '', false),
-    ( 7, '2024-10-03 07:06:28', 1, '', false)
+    ( 19, '2024-10-03 07:06:28', 1, '', false)
 ;
 
 INSERT INTO permits (resident_id, tree_request_id, status, approval_date)
@@ -296,33 +299,60 @@ VALUES
     (5, 3, 'approved', '2025-01-03'),
     (6, 4, 'approved', '2024-01-07'),
     (8, 5, 'approved', '2024-02-02'),
-    (9, 6, 'approved', '2024-07-05'),
+    (20, 6, 'approved', '2024-07-05'),
     (14, 7, 'denied', '2025-01-03'),
     (15, 8, 'pending', NULL),
     (21, 9, 'pending', NULL),
-    (7, 10, 'denied', '2025-03-12')
+    (19, 10, 'denied', '2025-03-12')
 ;
 
-INSERT INTO scheduled_visits (event_timestamp, cancelled, notes, organization_member_id)
+INSERT INTO scheduled_plantings (event_id, event_timestamp, cancelled, notes)
 VALUES
-    ('2024-10-09', false, '', 1),
-    ('2025-01-07', false, '', 2),
-    ('2024-01-12', true, '', 3)
-    /*('2024-03-03', true, ''),
-    ('2024-08-23', false, ''),
-    ('2025-02-06', false, ''),
-    ('2025-03-23', false, ''),
-    ('2025-03-21', true, ''),
-    ('2025-01-14', false, ''),
-    ('2024-07-22', false, '')*/
+    (1, '2024-10-09 08:00:00', false, ''),
+    (2, '2025-01-07 09:00:00', false, ''),
+    (3, '2024-01-12 10:30:00', true, ''),
+    (4, '2024-03-03 13:00:00', true, ''),
+    (5, '2024-08-23 06:00:00', false, ''),
+    (6, '2025-02-06 11:00:00', false, ''),
+    (7, '2025-03-23 07:30:00', false, ''),
+    (8, '2025-03-21 18:00:00', true, ''),
+    (9, '2025-01-14 12:00:00', false, ''),
+    (10, '2024-07-22 07:00:00', false, '')
 ;
 
-INSERT INTO visit_events (scheduled_visit_id, observations, photo_library_link, additional_visit_required) ;
+INSERT INTO scheduled_visits (event_id, event_timestamp, cancelled, notes, organization_member_id)
+VALUES
+    (1, '2024-10-09 08:00:00', false, '', 1),
+    (2, '2025-01-07 09:00:00', false, '', 2),
+    (3, '2024-01-12 10:30:00', true, '', 11),
+    (4, '2024-03-03 13:00:00', true, '', 15),
+    (5, '2024-08-23 06:00:00', false, '', 13),
+    (6, '2025-02-06 11:00:00', false, '', 18),
+    (7, '2025-03-23 07:30:00', false, '', 18),
+    (8, '2025-03-21 18:00:00', true, '', 1),
+    (9, '2025-01-14 12:00:00', false, '', 2),
+    (10, '2024-07-22 07:00:00', false, '', 10)
+;
 
+INSERT INTO visit_events (scheduled_visit_id, observations, photo_library_link, additional_visit_required)
+VALUES
+    (1, '', '', true),
+    (2, '', '', false),
+    (3, '', '', true),
+    (4, '', '', true),
+    (5, '', '', false),
+    (6, '', '', false),
+    (7, '', '', true),
+    (8, '', '', false),
+    (9, '', '', true),
+    (10, '', '', false)
+;
+
+/*
 INSERT INTO planting_events (scheduled_planting_id, observations, before_photos_library_link, after_photos_library_link, successful);
 
 INSERT INTO organization_members_lead_planting_events (organization_member_id, planting_event_id);
 
 INSERT INTO scheduled_plantings_have_volunteers (planting_event_id, volunteer_id);
 
-INSERT INTO planting_events_have_volunteers (planting_event_id, volunteer_id);
+INSERT INTO planting_events_have_volunteers (planting_event_id, volunteer_id);*/
