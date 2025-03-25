@@ -157,12 +157,35 @@ SELECT
 FROM
     tree_requests tr;
 
--- Find all trees planted within a selection of Oakland neighborhoods or zip codes specified by a user in the app.
--- This will get one neighborhood. To get a selection, run this query multiple times for each neighborhood
--- SELECT
---     t.common_name
--- FROM
---     neighborhoods n
--- -- INNER JOIN
--- WHERE
---     n = :p_neighborhood
+-- Find all trees planted within a selection of Oakland neighborhoods or zip codes specified by a
+-- user in the app. Parameterized neighbor value to allow for user input.
+SELECT
+    t.common_name,
+    COUNT(*) AS number_of_trees
+FROM
+    neighborhoods n
+        INNER JOIN residents r
+                   ON n.name = r.neighborhood
+        INNER JOIN tree_requests tr
+                   ON r.id = tr.resident_id
+        INNER JOIN scheduled_plantings sp
+                   ON tr.id = sp.tree_request_id
+        INNER JOIN planting_events pe
+                   ON sp.event_id = pe.scheduled_planting_id
+                       AND pe.successful = TRUE
+        INNER JOIN trees t
+                   ON tr.tree_id = t.id
+WHERE
+    n.name = :p_neighborhood
+GROUP BY t.common_name;
+
+-- For every species of trees, find the number of trees planted and some basic statistics on when
+-- trees were planted: the number of years since the first tree of the species was planted, the
+-- number of years since the most recent tree of the species was planted. In addition, include the
+-- year that had the most trees of the species planted and the number of trees planted.
+
+
+-- For each Oakland neighborhood, create a report that summarizes the requests, their progress
+-- (pending, in-process, completed, ec), the trees planted, etc. This is an opportunity for your
+-- team to demonstrate your skills, so it's expected that you'll demonstrate sophisticated database
+-- querying skills
