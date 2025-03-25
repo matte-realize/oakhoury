@@ -324,7 +324,7 @@ VALUES
     ( 33, '2024-03-04 09:12:20', 30, '', true)
 ;
 
-INSERT INTO permits (resident_id, tree_request_id, status, approval_date)
+INSERT INTO permits (resident_id, tree_request_id, status, decision_date)
 VALUES
     (3, 1, 'denied', '2024-07-05'),
     (4, 2, 'approved', '2024-09-09'),

@@ -72,7 +72,7 @@ CREATE TABLE permits (
     resident_id integer references residents(id),
     tree_request_id integer references tree_requests(id),
     status status,
-    approval_date date,
+    decision_date date,
     PRIMARY KEY(resident_id, tree_request_id)
 );
 
