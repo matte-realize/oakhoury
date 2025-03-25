@@ -196,7 +196,6 @@ VALUES
     ('Ethan', 'Moore', 'ethan.moore@gmail.com', '2XyF3aL9b#', '3834 Market Street', 94608, true, 'Longfellow'),
     ('Ava', 'Taylor', 'ava.taylor@gmail.com', 'Yq5F1dQ0#', '992 42nd Street', 94608, true, 'Longfellow'),
     ('Noah', 'Harris', 'noah.harris@gmail.com', '7Kp2VbF1@', '981 41st Street', 94606, false, 'Longfellow')
-
 ;
 
 INSERT INTO organization_members (resident_id, role, start_date)
@@ -373,32 +372,33 @@ VALUES
 
 INSERT INTO visit_events (scheduled_visit_id, observations, photo_library_link, additional_visit_required)
 VALUES
-    (13,'Area appears to not have a lot of planting area', '', true),
-    (14,'Area seems to be in good condition for planting', '', false),
-    (17, 'Area seems to have some debris, preventing planting', '', true),
-    (18, 'Area seems to have some debris, preventing planting', '', true),
-    (19, 'Area seems to be in good condition for planting', '', false),
-    (21, 'Area seems to be in good condition for planting', '', false),
-    (22, 'Area is too small', '', true),
-    (23, 'Area seems to be in good condition for planting', '', false),
-    (24, 'Area is too small', '', true),
-    (25, 'Area seems to be in good condition for planting, may be too small', '', false)
+    (13, 'Area appears to not have a lot of planting area', 'photo_link_13.com', true),
+    (14, 'Area seems to be in good condition for planting', 'photo_link_14.com', false),
+    (17, 'Area seems to have some debris, preventing planting', 'photo_link_17.com', true),
+    (18, 'Area seems to have some debris, preventing planting', 'photo_link_18.com', true),
+    (19, 'Area seems to be in good condition for planting', 'photo_link_19.com', false),
+    (21, 'Area seems to be in good condition for planting', 'photo_link_21.com', false),
+    (22, 'Area is too small', 'photo_link_22.com', true),
+    (23, 'Area seems to be in good condition for planting', 'photo_link_23.com', false),
+    (24, 'Area is too small', 'photo_link_24.com', true),
+    (25, 'Area seems to be in good condition for planting, may be too small', 'photo_link_25.com', false)
 ;
 
 
 INSERT INTO planting_events (scheduled_planting_id, observations, before_photos_library_link, after_photos_library_link, successful)
 VALUES
-    (1, 'Plant shows signs of fruit', '', '', true),
-    (2, 'Lots of cones were dropped', '', '', true),
-    (3, 'Berries were dropped', '', '', true),
-    (5, 'Soil was not able to be dug into', '', '', false),
-    (6, 'Foliage', '', '', true),
-    (7, 'Foliage', '', '', true),
-    (9, 'Weed is around the tree', '', '', true),
-    (10, 'Soil was not able to be dug into', '', '', false),
-    (11, 'Foliage', '', '', true),
-    (12, 'Lots of cones were dropped', '', '', true)
+    (1, 'Plant shows signs of fruit', 'before_photo_1.com', 'after_photo_1.com', true),
+    (2, 'Lots of cones were dropped', 'before_photo_2.com', 'after_photo_2.com', true),
+    (3, 'Berries were dropped', 'before_photo_3.com', 'after_photo_3.com', true),
+    (5, 'Soil was not able to be dug into', 'before_photo_5.com', 'after_photo_5.com', false),
+    (6, 'Foliage', 'before_photo_6.com', 'after_photo_6.com', true),
+    (7, 'Foliage', 'before_photo_7.com', 'after_photo_7.com', true),
+    (9, 'Weed is around the tree', 'before_photo_9.com', 'after_photo_9.com', true),
+    (10, 'Soil was not able to be dug into', 'before_photo_10.com', 'after_photo_10.com', false),
+    (11, 'Foliage', 'before_photo_11.com', 'after_photo_11.com', true),
+    (12, 'Lots of cones were dropped', 'before_photo_12.com', 'after_photo_12.com', true)
 ;
+
 
 INSERT INTO organization_members_lead_planting_events (organization_member_id, planting_event_id)
 VALUES
