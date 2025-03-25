@@ -43,3 +43,60 @@ WHERE
   AND pe.successful = TRUE
 GROUP BY r.first_name, r.last_name, r.id
 ORDER BY trees_planted_in_peak_year DESC, trees_planted DESC;
+
+-- The following query gives us a report regarding the organization members that lead plantings and attend visits; it
+-- displays the amount of plantings they've led, visits they've attended, their peak years and activity for both plantings
+-- and visits. This information is important for the higher up organization members so that they can make any necessary changes
+-- to lower level organization members.
+
+SELECT
+    r.first_name || ' ' || r.last_name,
+    COUNT(ompe) AS plantings_led,
+    (SELECT
+         DATE_PART('Year', sp2.event_timestamp)
+     FROM
+         organization_members_lead_planting_events AS ompe2
+             INNER JOIN planting_events AS p2 ON ompe2.planting_event_id = p2.scheduled_planting_id
+             INNER JOIN scheduled_plantings AS sp2 ON p2.scheduled_planting_id = sp2.event_id
+     WHERE
+         ompe2.organization_member_id = r.id
+     GROUP BY DATE_PART('Year', sp2.event_timestamp)
+     ORDER BY COUNT(*) DESC
+     LIMIT 1)   AS plantings_led_peak_year,
+    COUNT(sv)   AS visits_attended,
+    (SELECT
+         COUNT(*)
+     FROM
+         organization_members_lead_planting_events AS ompe2
+             INNER JOIN planting_events AS p2 ON ompe2.planting_event_id = p2.scheduled_planting_id
+             INNER JOIN scheduled_plantings AS sp2 ON p2.scheduled_planting_id = sp2.event_id
+     WHERE
+         ompe2.organization_member_id = r.id
+     GROUP BY DATE_PART('Year', sp2.event_timestamp)
+     ORDER BY COUNT(*) DESC
+     LIMIT 1)   AS plantings_led_in_peak_year,
+    (SELECT
+         DATE_PART('Year', sv2.event_timestamp)
+     FROM
+         scheduled_visits AS sv2
+     WHERE
+         sv2.organization_member_id = om.resident_id
+     GROUP BY DATE_PART('Year', sv2.event_timestamp)
+     ORDER BY COUNT(*) DESC
+     LIMIT 1)   AS visits_attended_peak_year,
+    (SELECT
+         COUNT(*)
+     FROM
+         scheduled_visits AS sv2
+     WHERE
+         sv2.organization_member_id = om.resident_id
+     GROUP BY DATE_PART('Year', sv2.event_timestamp)
+     ORDER BY COUNT(*) DESC
+     LIMIT 1)   AS visits_attended_in_peak_year
+FROM
+    organization_members AS om
+        INNER JOIN residents AS r ON om.resident_id = r.id
+        INNER JOIN organization_members_lead_planting_events AS ompe ON om.resident_id = ompe.organization_member_id
+        INNER JOIN scheduled_visits AS sv ON om.resident_id = sv.organization_member_id
+GROUP BY r.first_name, r.last_name, r.id, om.resident_id
+ORDER BY plantings_led DESC, visits_attended DESC;
