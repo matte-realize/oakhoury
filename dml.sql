@@ -171,7 +171,7 @@ VALUES
     ('Ashley', 'White', 'ash.w3928.j@gmail.com', 'l26973f', '3873 Rhoda Avenue', 94602, false, 'Upper Dimond'),
     ('Lily', 'Green', 'lilygreenhappy@yahoo.com', 'vdF43fg', '7945 Sunkist Drive', 94605, true, 'Eastmont Hills'),
     ('Ella', 'Li', 'eli5@gmail.com', 'uimvl29', '7616 Weld Street', 94621, false, 'Arroyo Viejo'),
-    ('Aaron', 'Williams', 'will.aaron@gmail.com', '38572ab', '1306 31st Avenue', 94601, false, 'Fruitvale'),
+    ('Aaron', 'Williams', 'will.aaron@gmail.com', '38572ab', '1306 31st Avenue', 94601, false, 'Fruitvale Station'),
     ('Henry', 'Cage', 'henryc@outlook.com', 'nmfgh347', '3813 Clarke Street' , 94609, false, 'Mosswood'),
     ('Tracy', 'Kemp', 'tracy020@gmail.com', 'gfdidij28', '4435 Shafter Avenue', 94609, false, 'Temescal'),
     ('Tracy', 'Haynes', 'haytray930@gmail.com', 'bhgv23', '5705 Genoa Street', 94608, false, 'Santa Fe'),
@@ -180,30 +180,31 @@ VALUES
     ('Jasper', 'Ruiz', 'jasperRRRR@gmail.com', '09876fdgf', '2020 E 15th Street', 94606, true, 'Rancho San Antonio'),
     ('Holden', 'Schmitt', 'schold@gmail.com', 'lmaj289', '1137 65th Avenue', 94621, true, 'Lockwood-Tevis'),
     ('Allen', 'Bell', 'bell.allen@outlook.com', 'happy2839', '9501 Granada Avenue', 94605, true, 'Oak Knoll'),
-    ('Raymond', 'Bell', 'raymond.bell@gmail.com', 'cake23672', '1244 51st Avenue', 94601, true, 'Melorse'),
+    ('Raymond', 'Bell', 'raymond.bell@gmail.com', 'cake23672', '1244 51st Avenue', 94601, true, 'Melrose'),
     ('Harvey', 'Choi', 'imharvey@yahoo.com', '3827352', '2344 90th Avenue', 94603, true, 'Castlemont'),
     ('Savanna', 'Jackson', 'savajack@gmail.com', 'abcdefghij', '9867 Lawlor Street', 94605, true, 'Toler Heights')
+RETURNING id
 ;
 
 INSERT INTO organization_members (resident_id, role, start_date)
 VALUES
-    (1, 'administrator', 1/1/2022),
-    (2, 'administrator', 1/1/2022),
-    (11, 'lead planter', 5/5/2023)
+    (1, 'administrator', '2022-1-1'),
+    (2, 'administrator', '2022-1-1'),
+    (11, 'lead planter', '2023-5-5')
 ;
 
 INSERT INTO volunteer_applications (resident_id, created, approved, notes)
 VALUES
-    (3, 4/24/2023, true, 'Has fertilizer to bring'),
-    (4, 2/12/2023, true, 'Can drive multiple volunteers'),
-    (5, 7/9/2024, true, 'Can supply additional shovels'),
-    (6, 12/8/2023, true, 'Is able to transport the tree to its location'),
-    (7, 6/1/2022, false, ''),
-    (8, 8/9/2023, true, ''),
-    (9, 11/4/2024, false, ''),
-    (14, 8/11/2024, true, ''),
-    (15, 3/1/2025, true, ''),
-    (21, 1/5/2025, true, '')
+    (3, '2023-04-24', true, 'Has fertilizer to bring'),
+    (4, '2023-02-12', true, 'Can drive other volunteers'),
+    (5, '2024-07-09', true, 'Can supply additional shovels'),
+    (6, '2023-12-08', true, 'Is able to transport the tree to its location'),
+    (7, '2022-06-01', false, ''),
+    (8, '2023-08-09', true, ''),
+    (9, '2024-11-04', false, ''),
+    (14, '2024-08-11', true, 'Can drive other volunteers'),
+    (15, '2025-03-01', true, ''),
+    (21, '2025-01-05', true, '')
 ;
 
 INSERT INTO trees (common_name, scientific_name, height_range, width_range, minimum_planting_bed_width, plantable_under_power_lines, native_to_ca, drought_tolerance, growth_rate, foliage_type, debris, root_damage_potential, nursery_availability, visual_attraction, pzharshsites, pzbay, pzurbanized, pznearnaturalareas)
@@ -290,35 +291,31 @@ VALUES
 
 INSERT INTO permits (resident_id, tree_request_id, status, approval_date)
 VALUES
-    (3, 1, 'denied', 7/5/2024),
-    (4, 2, 'approved', 9/9/2024),
-    (5, 3, 'approved', 1/3/2025),
-    (6, 4, 'approved', 1/7/2024),
-    (8, 5, 'approved', 2/2/2024),
-    (9, 6, 'approved', 7/5/2024),
-    (14, 7, 'denied', 1/3/2025),
-    (15, 8, 'pending', ?),
-    (21, 9, 'pending', ?),
-    (7, 10, 'denied', 3/12/2025)
+    (3, 1, 'denied', '2024-07-05'),
+    (4, 2, 'approved', '2024-09-09'),
+    (5, 3, 'approved', '2025-01-03'),
+    (6, 4, 'approved', '2024-01-07'),
+    (8, 5, 'approved', '2024-02-02'),
+    (9, 6, 'approved', '2024-07-05'),
+    (14, 7, 'denied', '2025-01-03'),
+    (15, 8, 'pending', NULL),
+    (21, 9, 'pending', NULL),
+    (7, 10, 'denied', '2025-03-12')
 ;
 
-INSERT INTO scheduled_events (event_timestamp, cancelled, notes)
+INSERT INTO scheduled_visits (event_timestamp, cancelled, notes, organization_member_id)
 VALUES
-    (, false, ''),
-    (, false, ''),
-    (, true, ''),
-    (, true, ''),
-    (, false, ''),
-    (, false, ''),
-    (, false, ''),
-    (, true, ''),
-    (, false, ''),
-    (, false, ''),
+    ('2024-10-09', false, '', 1),
+    ('2025-01-07', false, '', 2),
+    ('2024-01-12', true, '', 3)
+    /*('2024-03-03', true, ''),
+    ('2024-08-23', false, ''),
+    ('2025-02-06', false, ''),
+    ('2025-03-23', false, ''),
+    ('2025-03-21', true, ''),
+    ('2025-01-14', false, ''),
+    ('2024-07-22', false, '')*/
 ;
-
-INSERT INTO scheduled_plantings (event_id, event_timestamp, cancelled, notes);
-
-INSERT INTO scheduled_visits (event_id, event_timestamp, cancelled, notes, organization_member_id);
 
 INSERT INTO visit_events (scheduled_visit_id, observations, photo_library_link, additional_visit_required) ;
 
