@@ -182,7 +182,21 @@ VALUES
     ('Allen', 'Bell', 'bell.allen@outlook.com', 'happy2839', '9501 Granada Avenue', 94605, true, 'Oak Knoll'),
     ('Raymond', 'Bell', 'raymond.bell@gmail.com', 'cake23672', '1244 51st Avenue', 94601, true, 'Melrose'),
     ('Harvey', 'Choi', 'imharvey@yahoo.com', '3827352', '2344 90th Avenue', 94603, true, 'Castlemont'),
-    ('Savanna', 'Jackson', 'savajack@gmail.com', 'abcdefghij', '9867 Lawlor Street', 94605, true, 'Toler Heights')
+    ('Savanna', 'Jackson', 'savajack@gmail.com', 'abcdefghij', '9867 Lawlor Street', 94605, true, 'Toler Heights'),
+    ('Benjamin', 'Ruth', 'bruh@gmail.com', 'mngfj38', '7411 Altura Plaza', 94605, true, 'Caballo Hills'),
+    ('Edward', 'James', 'ej239@gmail.com', '4334jk', '3727 Glen Park Road', 94602, false, 'Glenview'),
+    ('Tanay', 'Hickleberry', 'hanerry@gmail.com', 'lmdfjk3', '500 E 19th Street', 94606, true, 'Ivy Hill'),
+    ('Emily', 'Parker', 'email.parker@gmail.com', 'G5l9aF8b', '901 Jefferson Street', 94607, true, 'Old Oakland'),
+    ('John', 'Smith', 'john.smith@gmail.com', '3hT1rS8p', '1510 32nd Street', 94612, false, 'Clawson'),
+    ('Olivia', 'Johnson', 'olivia.johnson@gmail.com', 'Bv7pL2sF', '2015 Chestnut Street', 94607, true, 'West Oakland'),
+    ('Michael', 'Davis', 'michael.davis@gmail.com', 'T9m6Jz2Q', '1907 Linden Street', 94607, true, 'West Oakland'),
+    ('Sophia', 'Lee', 'sophia.lee@gmail.com', 'W8vR7k9X', '4059 Everett Avenue', 94602, false, 'Glenview'),
+    ('Daniel', 'Brown', 'daniel.brown@gmail.com', 'Pq3R2jB7', '4016 Linwood Avenue', 94602, false, 'Glenview'),
+    ('Mia', 'Wilson', 'mia.wilson@gmail.com', 'F4bX9lA5v%', '920 39th Street', 94608, true, 'Longfellow'),
+    ('Ethan', 'Moore', 'ethan.moore@gmail.com', '2XyF3aL9b#', '3834 Market Street', 94608, true, 'Longfellow'),
+    ('Ava', 'Taylor', 'ava.taylor@gmail.com', 'Yq5F1dQ0#', '992 42nd Street', 94608, true, 'Longfellow'),
+    ('Noah', 'Harris', 'noah.harris@gmail.com', '7Kp2VbF1@', '981 41st Street', 94606, false, 'Longfellow')
+
 ;
 
 INSERT INTO organization_members (resident_id, role, start_date)
@@ -193,7 +207,10 @@ VALUES
     (15, 'group leader', '2024-02-04'),
     (13, 'group leader', '2023-11-12'),
     (18, 'group leader', '2025-01-01'),
-    (10, 'group leader', '2023-06-06')
+    (10, 'group leader', '2023-06-06'),
+    (22, 'group leader', '2024-08-06'),
+    (23, 'group leader', '2022-05-02'),
+    (24, 'group leader', '2023-12-14')
 ;
 
 INSERT INTO volunteer_applications (resident_id, created, approved, notes)
@@ -280,16 +297,31 @@ VALUES
 
 INSERT INTO tree_requests (resident_id, submission_timestamp, tree_id, site_description, approved)
 VALUES
-    (3, '2024-07-03 07:04:06', 42, '', false),
+    (3, '2024-07-03 07:04:06', 42, 'Contains large area for planting', false),
     (4, '2024-08-31 21:15:49', 55, '', true),
-    ( 5, '2024-12-08 15:46:12', 12, '', true),
+    ( 5, '2024-12-08 15:46:12', 12, 'Contains small area for planting', true),
     ( 6, '2023-12-10 11:21:54', 64, '', true),
-    ( 8, '2023-10-11 04:06:38', 9, '', true),
-    (20, '2024-07-02 01:02:03', 11, '', true),
-    (14, '2025-01-01 12:34:21', 36, '', true),
-    (15, '2024-06-22 07:12:45', 11, '', false),
+    ( 8, '2023-10-11 04:06:38', 9, 'Contains large area for planting', true),
+    (20, '2024-07-02 01:02:03', 11, 'Contains large area for planting', true),
+    (14, '2025-01-01 12:34:21', 36, 'Contains small area for planting', true),
+    (15, '2024-06-22 07:12:45', 11, 'Contains small area for planting', false),
     ( 21, '2024-04-12 17:23:30', 12, '', false),
-    ( 19, '2024-10-03 07:06:28', 1, '', false)
+    ( 19, '2024-10-03 07:06:28', 1, 'Contains large area for planting', false),
+    (16, '2024-11-11 11:11:11', 12, '', true),
+    (17, '2024-05-06 20:10:39', 16, '', true),
+    ( 18, '2025-01-01 15:46:12', 42, 'Contains small area for planting', true),
+    ( 19, '2024-07-10 14:05:09', 15, 'Contains large area for planting', true),
+    ( 22, '2024-9-15 12:04:28', 25, '', true),
+    (24, '2025-02-08 01:12:09', 30, '', true),
+    (25, '2025-02-15 09:15:24', 32, 'Contains large area for planting', true),
+    (26, '2024-02-12 08:08:08', 8, 'Contains large area for planting', true),
+    ( 27, '2024-05-14 10:50:21', 6, 'Contains small area for planting', true),
+    ( 28, '2023-07-12 09:00:00', 8, '', true),
+    (29, '2023-04-01 18:22:23', 1, 'Contains large area for planting', true),
+    (30, '2023-05-09 12:35:25', 5, '', true),
+    (31, '2024-02-14 01:11:11', 9, 'Contains large area for planting', true),
+    ( 32, '2024-06-11 12:54:50', 52, 'Contains small area for planting', true),
+    ( 33, '2024-03-04 09:12:20', 30, '', true)
 ;
 
 INSERT INTO permits (resident_id, tree_request_id, status, approval_date)
@@ -306,53 +338,106 @@ VALUES
     (19, 10, 'denied', '2025-03-12')
 ;
 
-INSERT INTO scheduled_plantings (event_id, event_timestamp, cancelled, notes)
+INSERT INTO scheduled_plantings (tree_request_id, event_timestamp, cancelled, notes)
 VALUES
-    (1, '2024-10-09 08:00:00', false, ''),
-    (2, '2025-01-07 09:00:00', false, ''),
-    (3, '2024-01-12 10:30:00', true, ''),
-    (4, '2024-03-03 13:00:00', true, ''),
-    (5, '2024-08-23 06:00:00', false, ''),
-    (6, '2025-02-06 11:00:00', false, ''),
-    (7, '2025-03-23 07:30:00', false, ''),
-    (8, '2025-03-21 18:00:00', true, ''),
-    (9, '2025-01-14 12:00:00', false, ''),
-    (10, '2024-07-22 07:00:00', false, '')
+    (1, '2024-10-10 12:00:00', false, 'Area is fertilized'),
+    (2, '2025-05-01 06:00:00', false, 'Area contains a few weeds'),
+    (3, '2024-06-06 12:00:00', false, ''),
+    (4, '2024-03-05 13:00:00', true, 'Area is fertilized'),
+    (5, '2024-09-14 09:00:00', false, ''),
+    (6, '2025-03-05 11:00:00', false, 'Area is fertilized'),
+    (7, '2025-05-05 07:00:00', false, 'Area is fertilized'),
+    (8, '2025-06-06 09:00:00', true, 'Area contains a few weeds'),
+    (9, '2025-02-15 12:00:00', false, ''),
+    (10, '2024-12-11 14:00:00', false, 'Area is fertilized'),
+    (11, '2024-10-01 17:00:00', false, ''),
+    (12, '2024-03-12 10:00:00', false, '')
 ;
 
-INSERT INTO scheduled_visits (event_id, event_timestamp, cancelled, notes, organization_member_id)
+INSERT INTO scheduled_visits (tree_request_id, event_timestamp, cancelled, notes, organization_member_id)
 VALUES
-    (1, '2024-10-09 08:00:00', false, '', 1),
-    (2, '2025-01-07 09:00:00', false, '', 2),
-    (3, '2024-01-12 10:30:00', true, '', 11),
-    (4, '2024-03-03 13:00:00', true, '', 15),
-    (5, '2024-08-23 06:00:00', false, '', 13),
-    (6, '2025-02-06 11:00:00', false, '', 18),
-    (7, '2025-03-23 07:30:00', false, '', 18),
-    (8, '2025-03-21 18:00:00', true, '', 1),
-    (9, '2025-01-14 12:00:00', false, '', 2),
-    (10, '2024-07-22 07:00:00', false, '', 10)
+    (13, '2024-10-09 08:00:00', false, '', 1),
+    (14, '2025-01-07 09:00:00', false, '', 2),
+    (15, '2024-01-12 10:30:00', true, 'Commuting is too hazardous with a frozen road', 11),
+    (16, '2024-03-03 13:00:00', true, 'The weather is stormy', 15),
+    (17, '2024-08-23 06:00:00', false, '', 13),
+    (18, '2025-02-06 11:00:00', false, 'Area may be bigger than anticipated', 18),
+    (19, '2025-03-23 07:30:00', false, 'Area may be smaller than anticipated', 18),
+    (20, '2025-03-21 18:00:00', true, 'The weather is stormy', 1),
+    (21, '2025-01-14 12:00:00', false, '', 2),
+    (22, '2024-07-22 07:00:00', false, '', 10),
+    (23, '2024-01-02 12:00:00', false, '', 10),
+    (24, '2024-06-05 12:00:00', false, '', 18),
+    (25, '2024-11-09 17:00:00', false, '', 1)
 ;
 
 INSERT INTO visit_events (scheduled_visit_id, observations, photo_library_link, additional_visit_required)
 VALUES
-    (1, '', '', true),
-    (2, '', '', false),
-    (3, '', '', true),
-    (4, '', '', true),
-    (5, '', '', false),
-    (6, '', '', false),
-    (7, '', '', true),
-    (8, '', '', false),
-    (9, '', '', true),
-    (10, '', '', false)
+    (13,'Area appears to not have a lot of planting area', '', true),
+    (14,'Area seems to be in good condition for planting', '', false),
+    (17, 'Area seems to have some debris, preventing planting', '', true),
+    (18, 'Area seems to have some debris, preventing planting', '', true),
+    (19, 'Area seems to be in good condition for planting', '', false),
+    (21, 'Area seems to be in good condition for planting', '', false),
+    (22, 'Area is too small', '', true),
+    (23, 'Area seems to be in good condition for planting', '', false),
+    (24, 'Area is too small', '', true),
+    (25, 'Area seems to be in good condition for planting, may be too small', '', false)
 ;
 
-/*
-INSERT INTO planting_events (scheduled_planting_id, observations, before_photos_library_link, after_photos_library_link, successful);
 
-INSERT INTO organization_members_lead_planting_events (organization_member_id, planting_event_id);
+INSERT INTO planting_events (scheduled_planting_id, observations, before_photos_library_link, after_photos_library_link, successful)
+VALUES
+    (1, 'Plant shows signs of fruit', '', '', true),
+    (2, 'Lots of cones were dropped', '', '', true),
+    (3, 'Berries were dropped', '', '', true),
+    (5, 'Soil was not able to be dug into', '', '', false),
+    (6, 'Foliage', '', '', true),
+    (7, 'Foliage', '', '', true),
+    (9, 'Weed is around the tree', '', '', true),
+    (10, 'Soil was not able to be dug into', '', '', false),
+    (11, 'Foliage', '', '', true),
+    (12, 'Lots of cones were dropped', '', '', true)
+;
 
-INSERT INTO scheduled_plantings_have_volunteers (planting_event_id, volunteer_id);
+INSERT INTO organization_members_lead_planting_events (organization_member_id, planting_event_id)
+VALUES
+    (23,1),
+    (15,2),
+    (11,3),
+    (15,5),
+    (11,6),
+    (24,7),
+    (10,9),
+    (10,10),
+    (18,11),
+    (15,12)
+;
 
-INSERT INTO planting_events_have_volunteers (planting_event_id, volunteer_id);*/
+INSERT INTO scheduled_plantings_have_volunteers (planting_event_id, volunteer_id)
+VALUES
+    (1, 4),
+    (2, 8),
+    (3, 14),
+    (4, 3),
+    (5, 22),
+    (6, 27),
+    (7, 25),
+    (8, 25),
+    (9, 14),
+    (10, 3)
+;
+
+INSERT INTO planting_events_have_volunteers (planting_event_id, volunteer_id)
+VALUES
+    (1, 3),
+    (2, 4),
+    (3, 5),
+    (5, 8),
+    (6, 14),
+    (7, 22),
+    (9, 24),
+    (10, 25),
+    (11, 27),
+    (12, 27)
+;

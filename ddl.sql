@@ -79,6 +79,7 @@ CREATE TABLE permits (
 -- Abstract table to hold scheduled_events
 CREATE TABLE scheduled_events (
     event_id serial primary key,
+    tree_request_id integer references tree_requests(id),
     event_timestamp timestamp,
     cancelled boolean,
     notes text
@@ -96,14 +97,14 @@ CREATE TABLE scheduled_visits (
 ) inherits (scheduled_events);
 
 CREATE TABLE visit_events (
-    scheduled_visit_id integer primary key references scheduled_plantings(event_id),
+    scheduled_visit_id integer primary key references scheduled_visits(event_id),
     observations text,
     photo_library_link varchar(50),
     additional_visit_required boolean
 );
 
 CREATE TABLE planting_events (
-    scheduled_planting_id integer primary key references scheduled_visits(event_id),
+    scheduled_planting_id integer primary key references scheduled_plantings(event_id),
     observations text,
     before_photos_library_link varchar(100),
     after_photos_library_link varchar(100),
