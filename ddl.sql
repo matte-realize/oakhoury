@@ -8,27 +8,27 @@ CREATE TABLE neighborhoods
 CREATE TABLE residents
 (
     id           SERIAL PRIMARY KEY,
-    first_name   VARCHAR(50),
-    last_name    VARCHAR(50),
+    first_name   VARCHAR(50) NOT NULL,
+    last_name    VARCHAR(50) NOT NULL,
     email        VARCHAR(100) UNIQUE NOT NULL,
     password     VARCHAR(50),
     street       VARCHAR(50),
     zip_code     CHAR(5),
     is_volunteer BOOLEAN,
-    neighborhood VARCHAR(100) REFERENCES neighborhoods (name)
+    neighborhood VARCHAR(100) REFERENCES neighborhoods (name) NOT NULL
 );
 
 CREATE TABLE organization_members
 (
-    resident_id INTEGER PRIMARY KEY REFERENCES residents (id),
-    role        VARCHAR(50),
+    resident_id INTEGER PRIMARY KEY REFERENCES residents (id) NOT NULL,
+    role        VARCHAR(50) NOT NULL,
     start_date  DATE
 );
 
 CREATE TABLE volunteer_applications
 (
-    resident_id INTEGER PRIMARY KEY REFERENCES residents (id),
-    created     DATE,
+    resident_id INTEGER PRIMARY KEY REFERENCES residents (id) NOT NULL,
+    created     DATE NOT NULL,
     approved    BOOLEAN,
     notes       TEXT
 );
@@ -40,9 +40,9 @@ CREATE TYPE root_damage AS ENUM ('low', 'moderate', 'high');
 CREATE TYPE nursery_availability AS ENUM ('low', 'moderate', 'high');
 CREATE TABLE trees
 (
-    id                          SERIAL PRIMARY KEY,
+    id                          SERIAL PRIMARY KEY NOT NULL,
     common_name                 VARCHAR(100) UNIQUE,
-    scientific_name             VARCHAR(100) UNIQUE,
+    scientific_name             VARCHAR(100) UNIQUE NOT NULL,
     height_range                int4range,
     width_range                 int4range,
     minimum_planting_bed_width  INTEGER,
@@ -64,10 +64,10 @@ CREATE TABLE trees
 
 CREATE TABLE tree_requests
 (
-    id                   SERIAL PRIMARY KEY,
-    resident_id          INTEGER REFERENCES residents (id),
-    submission_timestamp TIMESTAMP,
-    tree_id              INTEGER REFERENCES trees (id),
+    id                   SERIAL PRIMARY KEY NOT NULL,
+    resident_id          INTEGER REFERENCES residents (id) NOT NULL,
+    submission_timestamp TIMESTAMP NOT NULL,
+    tree_id              INTEGER REFERENCES trees (id) NOT NULL,
     site_description     TEXT,
     approved             BOOLEAN,
     UNIQUE (resident_id, submission_timestamp)
@@ -78,7 +78,7 @@ CREATE TABLE permits
 (
     resident_id     INTEGER REFERENCES residents (id),
     tree_request_id INTEGER REFERENCES tree_requests (id),
-    status          status,
+    status          status NOT NULL,
     decision_date   DATE,
     PRIMARY KEY (resident_id, tree_request_id)
 );
@@ -86,9 +86,9 @@ CREATE TABLE permits
 -- Abstract table to hold scheduled_events
 CREATE TABLE scheduled_events
 (
-    event_id        SERIAL PRIMARY KEY,
-    tree_request_id INTEGER REFERENCES tree_requests (id),
-    event_timestamp TIMESTAMP,
+    event_id        SERIAL PRIMARY KEY NOT NULL,
+    tree_request_id INTEGER REFERENCES tree_requests (id) NOT NULL,
+    event_timestamp TIMESTAMP NOT NULL,
     cancelled       BOOLEAN,
     notes           TEXT
 );
@@ -102,7 +102,7 @@ CREATE TABLE scheduled_plantings
 
 CREATE TABLE scheduled_visits
 (
-    organization_member_id INTEGER REFERENCES organization_members (resident_id),
+    organization_member_id INTEGER REFERENCES organization_members (resident_id) NOT NULL,
     PRIMARY KEY (event_id)
 ) INHERITS (scheduled_events);
 
@@ -110,7 +110,7 @@ CREATE TABLE visit_events
 (
     scheduled_visit_id        INTEGER PRIMARY KEY REFERENCES scheduled_visits (event_id),
     observations              TEXT,
-    photo_library_link        VARCHAR(50),
+    photo_library_link        VARCHAR(100),
     additional_visit_required BOOLEAN
 );
 
@@ -120,7 +120,7 @@ CREATE TABLE planting_events
     observations               TEXT,
     before_photos_library_link VARCHAR(100),
     after_photos_library_link  VARCHAR(100),
-    successful                 BOOLEAN
+    successful                 BOOLEAN NOT NULL
 );
 
 -- junction tables

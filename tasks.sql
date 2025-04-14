@@ -29,8 +29,9 @@ SET approved = TRUE
 WHERE id = :id;
 
 -- Schedule a visit
-INSERT INTO scheduled_visits (event_timestamp, cancelled, notes, organization_member_id)
-VALUES (:timestamp,
+INSERT INTO scheduled_visits (tree_request_id, event_timestamp, cancelled, notes, organization_member_id)
+VALUES (:tree_request_id,
+        :timestamp,
         FALSE,
         :notes,
         :organization_member_id);
@@ -49,8 +50,9 @@ VALUES (:scheduled_visit_id,
         :additional_visit_required);
 
 -- Schedule a planting (without any org members or volunteers yet)
-INSERT INTO scheduled_plantings (event_timestamp, cancelled, notes)
-VALUES (:timestamp,
+INSERT INTO scheduled_plantings (tree_request_id, event_timestamp, cancelled, notes)
+VALUES (:tree_request_id,
+        :timestamp,
         FALSE,
         :notes);
 
