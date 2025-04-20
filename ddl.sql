@@ -15,19 +15,19 @@ CREATE TABLE residents
     street       VARCHAR(50),
     zip_code     CHAR(5),
     is_volunteer BOOLEAN,
-    neighborhood VARCHAR(100) REFERENCES neighborhoods (name) NOT NULL
+    neighborhood VARCHAR(100) REFERENCES neighborhoods (name) ON DELETE NO ACTION ON UPDATE CASCADE NOT NULL
 );
 
 CREATE TABLE organization_members
 (
-    resident_id INTEGER PRIMARY KEY REFERENCES residents (id) NOT NULL,
+    resident_id INTEGER PRIMARY KEY REFERENCES residents (id) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL,
     role        VARCHAR(50) NOT NULL,
     start_date  DATE
 );
 
 CREATE TABLE volunteer_applications
 (
-    resident_id INTEGER PRIMARY KEY REFERENCES residents (id) NOT NULL,
+    resident_id INTEGER PRIMARY KEY REFERENCES residents (id) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL,
     created     DATE NOT NULL,
     approved    BOOLEAN,
     notes       TEXT
@@ -65,9 +65,9 @@ CREATE TABLE trees
 CREATE TABLE tree_requests
 (
     id                   SERIAL PRIMARY KEY NOT NULL,
-    resident_id          INTEGER REFERENCES residents (id) NOT NULL,
+    resident_id          INTEGER REFERENCES residents (id) ON DELETE NO ACTION ON UPDATE CASCADE NOT NULL,
     submission_timestamp TIMESTAMP NOT NULL,
-    tree_id              INTEGER REFERENCES trees (id) NOT NULL,
+    tree_id              INTEGER REFERENCES trees (id) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL,
     site_description     TEXT,
     approved             BOOLEAN,
     UNIQUE (resident_id, submission_timestamp)
@@ -76,8 +76,8 @@ CREATE TABLE tree_requests
 CREATE TYPE status AS ENUM ('pending', 'approved', 'denied');
 CREATE TABLE permits
 (
-    resident_id     INTEGER REFERENCES residents (id),
-    tree_request_id INTEGER REFERENCES tree_requests (id),
+    resident_id     INTEGER REFERENCES residents (id) ON DELETE CASCADE ON UPDATE NO ACTION,
+    tree_request_id INTEGER REFERENCES tree_requests (id) ON DELETE NO ACTION ON UPDATE CASCADE,
     status          status NOT NULL,
     decision_date   DATE,
     PRIMARY KEY (resident_id, tree_request_id)
@@ -87,7 +87,7 @@ CREATE TABLE permits
 CREATE TABLE scheduled_events
 (
     event_id        SERIAL PRIMARY KEY NOT NULL,
-    tree_request_id INTEGER REFERENCES tree_requests (id) NOT NULL,
+    tree_request_id INTEGER REFERENCES tree_requests (id) ON DELETE CASCADE ON UPDATE NO ACTION NOT NULL,
     event_timestamp TIMESTAMP NOT NULL,
     cancelled       BOOLEAN,
     notes           TEXT
@@ -102,13 +102,13 @@ CREATE TABLE scheduled_plantings
 
 CREATE TABLE scheduled_visits
 (
-    organization_member_id INTEGER REFERENCES organization_members (resident_id) NOT NULL,
+    organization_member_id INTEGER REFERENCES organization_members (resident_id) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL,
     PRIMARY KEY (event_id)
 ) INHERITS (scheduled_events);
 
 CREATE TABLE visit_events
 (
-    scheduled_visit_id        INTEGER PRIMARY KEY REFERENCES scheduled_visits (event_id),
+    scheduled_visit_id        INTEGER PRIMARY KEY REFERENCES scheduled_visits (event_id) ON DELETE CASCADE ON UPDATE CASCADE,
     observations              TEXT,
     photo_library_link        VARCHAR(100),
     additional_visit_required BOOLEAN
@@ -116,7 +116,7 @@ CREATE TABLE visit_events
 
 CREATE TABLE planting_events
 (
-    scheduled_planting_id      INTEGER PRIMARY KEY REFERENCES scheduled_plantings (event_id),
+    scheduled_planting_id      INTEGER PRIMARY KEY REFERENCES scheduled_plantings (event_id) ON DELETE CASCADE ON UPDATE CASCADE,
     observations               TEXT,
     before_photos_library_link VARCHAR(100),
     after_photos_library_link  VARCHAR(100),
@@ -127,21 +127,21 @@ CREATE TABLE planting_events
 
 CREATE TABLE organization_members_lead_scheduled_plantings
 (
-    organization_member_id INTEGER REFERENCES organization_members (resident_id),
-    scheduled_planting_id  INTEGER REFERENCES scheduled_plantings (event_id),
+    organization_member_id INTEGER REFERENCES organization_members (resident_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    scheduled_planting_id  INTEGER REFERENCES scheduled_plantings (event_id) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (organization_member_id, scheduled_planting_id)
 );
 
 CREATE TABLE scheduled_plantings_have_volunteers
 (
-    planting_event_id INTEGER REFERENCES scheduled_plantings (event_id),
-    volunteer_id      INTEGER REFERENCES residents (id),
+    planting_event_id INTEGER REFERENCES scheduled_plantings (event_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    volunteer_id      INTEGER REFERENCES residents (id) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (planting_event_id, volunteer_id)
 );
 
 CREATE TABLE planting_events_have_volunteers
 (
-    planting_event_id INTEGER REFERENCES planting_events (scheduled_planting_id),
-    volunteer_id      INTEGER REFERENCES residents (id),
+    planting_event_id INTEGER REFERENCES planting_events (scheduled_planting_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    volunteer_id      INTEGER REFERENCES residents (id) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (planting_event_id, volunteer_id)
 );
