@@ -125,11 +125,11 @@ CREATE TABLE planting_events
 
 -- junction tables
 
-CREATE TABLE organization_members_lead_planting_events
+CREATE TABLE organization_members_lead_scheduled_plantings
 (
     organization_member_id INTEGER REFERENCES organization_members (resident_id),
-    planting_event_id      INTEGER REFERENCES planting_events (scheduled_planting_id),
-    PRIMARY KEY (organization_member_id, planting_event_id)
+    scheduled_planting_id  INTEGER REFERENCES scheduled_plantings (event_id),
+    PRIMARY KEY (organization_member_id, scheduled_planting_id)
 );
 
 CREATE TABLE scheduled_plantings_have_volunteers

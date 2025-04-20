@@ -57,9 +57,9 @@ VALUES (:tree_request_id,
         :notes);
 
 -- Add an organization member to a scheduled planting
-INSERT INTO organization_members_lead_planting_events (organization_member_id, planting_event_id)
+INSERT INTO organization_members_lead_scheduled_plantings (organization_member_id, scheduled_planting_id)
 VALUES (:organization_member_id,
-        :planting_event_id);
+        :scheduled_planting_id);
 
 -- Add a volunteer to a scheduled planting
 INSERT INTO scheduled_plantings_have_volunteers (volunteer_id, planting_event_id)

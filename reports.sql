@@ -55,8 +55,8 @@ SELECT
     (SELECT
          DATE_PART('Year', sp2.event_timestamp)
      FROM
-         organization_members_lead_planting_events AS ompe2
-             INNER JOIN planting_events AS p2 ON ompe2.planting_event_id = p2.scheduled_planting_id
+         organization_members_lead_scheduled_plantings AS ompe2
+             INNER JOIN planting_events AS p2 ON ompe2.scheduled_planting_id = p2.scheduled_planting_id
              INNER JOIN scheduled_plantings AS sp2 ON p2.scheduled_planting_id = sp2.event_id
      WHERE
          ompe2.organization_member_id = r.id
@@ -67,8 +67,8 @@ SELECT
     (SELECT
          COUNT(*)
      FROM
-         organization_members_lead_planting_events AS ompe2
-             INNER JOIN planting_events AS p2 ON ompe2.planting_event_id = p2.scheduled_planting_id
+         organization_members_lead_scheduled_plantings AS ompe2
+             INNER JOIN planting_events AS p2 ON ompe2.scheduled_planting_id = p2.scheduled_planting_id
              INNER JOIN scheduled_plantings AS sp2 ON p2.scheduled_planting_id = sp2.event_id
      WHERE
          ompe2.organization_member_id = r.id
@@ -96,7 +96,38 @@ SELECT
 FROM
     organization_members AS om
         INNER JOIN residents AS r ON om.resident_id = r.id
-        INNER JOIN organization_members_lead_planting_events AS ompe ON om.resident_id = ompe.organization_member_id
+        INNER JOIN organization_members_lead_scheduled_plantings AS ompe ON om.resident_id = ompe.organization_member_id
         INNER JOIN scheduled_visits AS sv ON om.resident_id = sv.organization_member_id
 GROUP BY r.first_name, r.last_name, r.id, om.resident_id
 ORDER BY plantings_led DESC, visits_attended DESC;
+
+
+
+SELECT
+    t.common_name,
+    r.neighborhood,
+    (SELECT
+         COUNT(*)
+     FROM
+         tree_requests AS tr2
+             INNER JOIN residents AS r2 ON tr2.resident_id = r2.id
+     WHERE
+         r2.neighborhood = r.neighborhood
+     HAVING
+           COUNT(*) > 0
+       AND tr2.approved = TRUE) AS num_in_neighbor,
+    (SELECT
+         DATE_PART('Year', sp.event_timestamp)
+     FROM
+         tree_requests AS tr2
+             INNER JOIN residents AS r2 ON tr2.resident_id = r2.id
+             INNER JOIN scheduled_plantings AS sp ON tr2.id = sp.tree_request_id
+     WHERE
+         tr2.approved = TRUE
+     GROUP BY DATE_PART('Year', sp.event_timestamp)
+     ORDER BY COUNT(*) DESC
+     LIMIT 1)                   AS plantings_peak_year
+FROM
+    trees AS t
+        INNER JOIN public.tree_requests tr ON t.id = tr.tree_id
+        INNER JOIN residents r ON tr.resident_id = r.id;

@@ -499,7 +499,8 @@ VALUES (1, 'Plant shows signs of fruit', '', '', TRUE),
        (12, 'Lots of cones were dropped', '', '', TRUE)
 ;
 
-INSERT INTO organization_members_lead_planting_events (organization_member_id, planting_event_id)
+-- needs to reference scheduled plantings ids not planting events ids
+INSERT INTO organization_members_lead_planting_events (organization_member_id, planting_event_id) -- new name organization_members_lead_scheduled_plantings
 VALUES (23, 1),
        (15, 2),
        (11, 3),
