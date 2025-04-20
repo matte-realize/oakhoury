@@ -134,8 +134,9 @@ $$ LANGUAGE plpgsql;
 SELECT id,
        get_tree_request_status(id)               AS status,
        -- https://stackoverflow.com/questions/45487731/postgres-get-number-of-days-since-date
-       CURRENT_DATE - submission_timestamp::DATE AS days_since_planting
-FROM tree_requests tr;
+       CURRENT_DATE - submission_timestamp::DATE AS days_since_submission
+FROM tree_requests tr
+WHERE get_tree_request_status(id) <> 'completed';
 
 -- Find all trees planted within a selection of Oakland neighborhoods or zip codes specified by a
 -- user in the app. Parameterized neighbor value to allow for user input.
@@ -161,6 +162,9 @@ GROUP BY t.common_name;
 -- number of years since the most recent tree of the species was planted. In addition, include the
 -- year that had the most trees of the species planted and the number of trees planted.
 -- https://www.scaler.com/topics/datediff-in-postgresql/
+
+-- chisos red oak tree appears twice so the years_with_most_planted is not working correctly
+
 WITH years_with_most_planted AS (SELECT t.id,
                                         EXTRACT(YEAR FROM sp.event_timestamp::DATE) AS year_planted
                                  FROM trees t
@@ -189,8 +193,8 @@ WITH years_with_most_planted AS (SELECT t.id,
 SELECT t.common_name,
        COUNT(tr.id)                                                                       AS number_of_trees_planted,
        MIN(EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM sp.event_timestamp::DATE)) AS years_since_planting,
-       ymp.year_planted,
-       nppy.count
+       ymp.year_planted AS peak_planting_year,
+       nppy.count AS number_planted_in_peak_year
 FROM trees t
          JOIN tree_requests tr
               ON t.id = tr.tree_id
@@ -211,24 +215,17 @@ ORDER BY number_of_trees_planted DESC;
 -- (pending, in-process, completed, ec), the trees planted, etc. This is an opportunity for your
 -- team to demonstrate your skills, so it's expected that you'll demonstrate sophisticated database
 -- querying skills
-SELECT r.neighborhood,
-       tr.site_description,
-       p.status,
-       sp.tree_request_id,
-       pe.successful,
-       t.common_name
+SELECT n.name,
+       t.common_name,
+       tr.id AS tree_request_id,
+       get_tree_request_status(tr.id) AS request_status,
+       tr.site_description
 FROM neighborhoods n
-         INNER JOIN residents r
-                    ON n.name = r.neighborhood
-         INNER JOIN tree_requests tr
-                    ON r.id = tr.resident_id
-         INNER JOIN permits p
-                    ON tr.id = p.tree_request_id
-         INNER JOIN scheduled_plantings sp
-                    ON tr.id = sp.tree_request_id
-         INNER JOIN planting_events pe
-                    ON sp.event_id = pe.scheduled_planting_id
-                        AND pe.successful = TRUE
-         INNER JOIN trees t
-                    ON tr.tree_id = t.id
-GROUP BY r.neighborhood, tr.site_description, p.status, sp.tree_request_id, pe.successful, t.common_name;
+    INNER JOIN residents r
+               ON n.name = r.neighborhood
+    INNER JOIN tree_requests tr
+               ON r.id = tr.resident_id
+    INNER JOIN trees t
+               ON tr.tree_id = t.id
+GROUP BY n.name, tr.id, t.common_name
+ORDER BY n.name ASC;
