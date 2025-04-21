@@ -12,7 +12,7 @@ SELECT
     r.first_name || ' ' || r.last_name AS volunteer_name,
     MIN(sp.event_timestamp)            AS first_planting,
     MAX(sp.event_timestamp)            AS most_recent_planting,
-    COUNT(pev)                         AS trees_planted_this_year,
+    COUNT(pev)                         AS trees_planted,
     (SELECT
          EXTRACT(YEAR FROM sp2.event_timestamp::TIMESTAMP)
      FROM
@@ -47,12 +47,14 @@ WHERE
   AND pe.successful = TRUE
   AND EXTRACT(YEAR FROM sp.event_timestamp::TIMESTAMP) = :p_year
 GROUP BY r.first_name, r.last_name, r.id
-ORDER BY trees_planted_this_year DESC, trees_planted_in_peak_year DESC;
+ORDER BY trees_planted DESC, trees_planted_in_peak_year DESC;
 
 -- The following query gives us a report regarding the organization members that lead plantings and attend visits; it
 -- displays the amount of plantings they've led, visits they've attended, their peak years and activity for both plantings
--- and visits. This information is important for the higher up organization members so that they can make any necessary changes
--- to lower level organization members.
+-- and visits. This information is important for the higher up organization members so that they can make any necessary
+-- changes to lower level organization members. Year has been parameterized so that the user can query data for whichever
+-- year they desire, this parameterization allows for the organization to track the activity and success of each organization
+-- member more clearly.
 
 SELECT
     r.first_name || ' ' || r.last_name AS org_member_name,
@@ -107,11 +109,14 @@ FROM
     organization_members AS om
         INNER JOIN residents AS r ON om.resident_id = r.id
         LEFT OUTER JOIN organization_members_lead_scheduled_plantings AS ompe ON om.resident_id = ompe.organization_member_id
-        LEFT OUTER JOIN scheduled_visits AS sv ON om.resident_id = sv.organization_member_id AND sv.cancelled = FALSE
+        LEFT OUTER JOIN scheduled_visits AS sv ON om.resident_id = sv.organization_member_id
+                                                      AND sv.cancelled = FALSE
+                                                      AND EXTRACT(YEAR FROM sv.event_timestamp::TIMESTAMP) = :p_year
         INNER JOIN scheduled_plantings AS sp ON ompe.scheduled_planting_id = sp.event_id
         LEFT OUTER JOIN planting_events AS pe ON sp.event_id = pe.scheduled_planting_id AND pe.successful = TRUE
 WHERE
-    sp.cancelled = FALSE
+        sp.cancelled = FALSE
+    AND EXTRACT(YEAR FROM sp.event_timestamp::TIMESTAMP) = :p_year
 GROUP BY r.first_name, r.last_name, r.id, om.resident_id
 ORDER BY plantings_led DESC, visits_attended DESC;
 
