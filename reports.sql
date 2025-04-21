@@ -120,6 +120,11 @@ WHERE
 GROUP BY r.first_name, r.last_name, r.id, om.resident_id
 ORDER BY plantings_led DESC, visits_attended DESC;
 
+-- The following query gives us a report regarding the total number of trees planted in neighborhood where they have been
+-- planted previously, the number planted in said neighborhood this year, as well as the peak year of planting in that
+-- neighborhood and the number planted during this year. This data is important for the organization so they can keep
+-- track of where the planted trees have gone, and monitor the amount that gets planted in each neighborhood.
+
 SELECT
     t.common_name,
     r.neighborhood,
@@ -128,23 +133,52 @@ SELECT
      FROM
          tree_requests AS tr2
              INNER JOIN residents AS r2 ON tr2.resident_id = r2.id
+             INNER JOIN scheduled_plantings sp2 ON tr2.id = sp2.tree_request_id
+             INNER JOIN planting_events pe2 ON sp2.event_id = pe2.scheduled_planting_id
      WHERE
          r2.neighborhood = r.neighborhood
-     HAVING
-           COUNT(*) > 0
-       AND tr2.approved = TRUE) AS num_in_neighbor,
+         AND pe2.successful = TRUE) AS num_in_neighbor,
     (SELECT
-         DATE_PART('Year', sp.event_timestamp)
+         COUNT(*)
+     FROM    tree_requests AS tr2
+         INNER JOIN residents AS r2 ON tr2.resident_id = r2.id
+         INNER JOIN scheduled_plantings AS sp2 ON tr2.id = sp2.tree_request_id
+         INNER JOIN planting_events pe2 ON sp2.event_id = pe2.scheduled_planting_id
+     WHERE
+             r2.neighborhood = r.neighborhood
+         AND pe2.successful = TRUE
+         AND EXTRACT(YEAR FROM sp2.event_timestamp::TIMESTAMP) = EXTRACT(YEAR FROM CURRENT_DATE::DATE)) AS num_planted_this_year,
+    (SELECT
+         EXTRACT(YEAR FROM sp2.event_timestamp::TIMESTAMP)
      FROM
          tree_requests AS tr2
              INNER JOIN residents AS r2 ON tr2.resident_id = r2.id
-             INNER JOIN scheduled_plantings AS sp ON tr2.id = sp.tree_request_id
+             INNER JOIN scheduled_plantings AS sp2 ON tr2.id = sp2.tree_request_id
+             INNER JOIN planting_events pe2 ON sp2.event_id = pe2.scheduled_planting_id
      WHERE
-         tr2.approved = TRUE
-     GROUP BY DATE_PART('Year', sp.event_timestamp)
+                r2.neighborhood = r.neighborhood
+            AND pe2.successful = TRUE
+     GROUP BY EXTRACT(YEAR FROM sp2.event_timestamp::TIMESTAMP)
      ORDER BY COUNT(*) DESC
-     LIMIT 1)                   AS plantings_peak_year
+     LIMIT 1)                   AS plantings_peak_year,
+    (SELECT
+         COUNT(*)
+     FROM
+         tree_requests AS tr2
+             INNER JOIN residents AS r2 ON tr2.resident_id = r2.id
+             INNER JOIN scheduled_plantings AS sp2 ON tr2.id = sp2.tree_request_id
+             INNER JOIN planting_events pe2 ON sp2.event_id = pe2.scheduled_planting_id
+     WHERE
+           r2.neighborhood = r.neighborhood
+       AND pe2.successful = TRUE
+     GROUP BY EXTRACT(YEAR FROM sp2.event_timestamp::TIMESTAMP)
+     ORDER BY COUNT(*) DESC
+     LIMIT 1)                   AS plantings_in_peak_year
 FROM
     trees AS t
         INNER JOIN public.tree_requests tr ON t.id = tr.tree_id
-        INNER JOIN residents r ON tr.resident_id = r.id;
+        INNER JOIN residents r ON tr.resident_id = r.id
+        INNER JOIN scheduled_plantings sp ON tr.id = sp.tree_request_id
+        INNER JOIN planting_events pe ON sp.event_id = pe.scheduled_planting_id
+WHERE pe.successful = TRUE
+ORDER BY t.common_name ASC;
