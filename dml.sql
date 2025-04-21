@@ -455,8 +455,8 @@ VALUES (2, '2024-10-10 12:00:00', FALSE, 'Area is fertilized'),
        (13, '2024-12-11 14:00:00', FALSE, 'Area is fertilized'),
        (14, '2024-10-01 17:00:00', FALSE, ''),
        (15, '2024-01-10 10:00:00', FALSE, ''),
-       (25, '2024-09-03 10:00:00', FALSE,''),
-       (26, '2024-07-19 10:00:00', FALSE, '')
+       (26, '2024-09-03 10:00:00', FALSE,''),
+       (27, '2024-07-19 10:00:00', FALSE, '')
 ;
 
 INSERT INTO scheduled_visits (tree_request_id, event_timestamp, cancelled, notes, organization_member_id)
