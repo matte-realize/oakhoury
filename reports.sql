@@ -136,18 +136,19 @@ SELECT
              INNER JOIN scheduled_plantings sp2 ON tr2.id = sp2.tree_request_id
              INNER JOIN planting_events pe2 ON sp2.event_id = pe2.scheduled_planting_id
      WHERE
-         r2.neighborhood = r.neighborhood
-         AND pe2.successful = TRUE) AS num_in_neighbor,
+           r2.neighborhood = r.neighborhood
+       AND tr2.tree_id = t.id
+       AND pe2.successful = TRUE) AS num_in_neighborhood,
     (SELECT
          COUNT(*)
      FROM    tree_requests AS tr2
-         INNER JOIN residents AS r2 ON tr2.resident_id = r2.id
-         INNER JOIN scheduled_plantings AS sp2 ON tr2.id = sp2.tree_request_id
-         INNER JOIN planting_events pe2 ON sp2.event_id = pe2.scheduled_planting_id
+                 INNER JOIN residents AS r2 ON tr2.resident_id = r2.id
+                 INNER JOIN scheduled_plantings AS sp2 ON tr2.id = sp2.tree_request_id
+                 INNER JOIN planting_events pe2 ON sp2.event_id = pe2.scheduled_planting_id
      WHERE
-             r2.neighborhood = r.neighborhood
-         AND pe2.successful = TRUE
-         AND EXTRACT(YEAR FROM sp2.event_timestamp::TIMESTAMP) = EXTRACT(YEAR FROM CURRENT_DATE::DATE)) AS num_planted_this_year,
+           r2.neighborhood = r.neighborhood
+       AND pe2.successful = TRUE
+       AND EXTRACT(YEAR FROM sp2.event_timestamp::TIMESTAMP) = EXTRACT(YEAR FROM CURRENT_DATE::DATE)) AS num_planted_this_year,
     (SELECT
          EXTRACT(YEAR FROM sp2.event_timestamp::TIMESTAMP)
      FROM
@@ -156,8 +157,8 @@ SELECT
              INNER JOIN scheduled_plantings AS sp2 ON tr2.id = sp2.tree_request_id
              INNER JOIN planting_events pe2 ON sp2.event_id = pe2.scheduled_planting_id
      WHERE
-                r2.neighborhood = r.neighborhood
-            AND pe2.successful = TRUE
+           r2.neighborhood = r.neighborhood
+       AND pe2.successful = TRUE
      GROUP BY EXTRACT(YEAR FROM sp2.event_timestamp::TIMESTAMP)
      ORDER BY COUNT(*) DESC
      LIMIT 1)                   AS plantings_peak_year,
@@ -181,4 +182,5 @@ FROM
         INNER JOIN scheduled_plantings sp ON tr.id = sp.tree_request_id
         INNER JOIN planting_events pe ON sp.event_id = pe.scheduled_planting_id
 WHERE pe.successful = TRUE
+GROUP BY t.common_name, r.neighborhood, t.id
 ORDER BY t.common_name ASC;
