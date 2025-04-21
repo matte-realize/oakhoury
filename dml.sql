@@ -441,24 +441,33 @@ VALUES (3, 1, 'denied', '2024-07-05'),
 ;
 
 INSERT INTO scheduled_plantings (tree_request_id, event_timestamp, cancelled, notes)
-VALUES (1, '2024-10-10 12:00:00', FALSE, 'Area is fertilized'),
-       (2, '2024-09-30 06:00:00', FALSE, 'Area contains a few weeds'),
-       (3, '2024-06-06 12:00:00', FALSE, ''),
-       (4, '2024-03-05 13:00:00', TRUE, 'Area is fertilized'),
-       (5, '2024-09-14 09:00:00', FALSE, ''),
+VALUES (2, '2024-10-10 12:00:00', FALSE, 'Area is fertilized'),
+       (3, '2024-09-30 06:00:00', FALSE, 'Area contains a few weeds'),
+       (4, '2024-06-06 12:00:00', FALSE, ''),
+       (5, '2024-03-05 13:00:00', TRUE, 'Area is fertilized'),
        (6, '2025-03-05 11:00:00', FALSE, 'Area is fertilized'),
-       (7, '2025-02-05 07:00:00', FALSE, 'Area is fertilized'),
-       (8, '2025-01-01 09:00:00', TRUE, 'Area contains a few weeds'),
-       (9, '2025-02-15 12:00:00', FALSE, ''),
-       (10, '2024-12-11 14:00:00', FALSE, 'Area is fertilized'),
-       (11, '2024-10-01 17:00:00', FALSE, ''),
-       (12, '2024-03-12 10:00:00', FALSE, '')
+       (7, '2024-09-14 09:00:00', FALSE, ''),
+       (10, '2025-02-05 07:00:00', FALSE, 'Area is fertilized'),
+       (11, '2025-01-01 09:00:00', TRUE, 'Area contains a few weeds'),
+       (12, '2025-02-15 12:00:00', FALSE, ''),
+       (13, '2024-12-11 14:00:00', FALSE, 'Area is fertilized'),
+       (14, '2024-10-01 17:00:00', FALSE, ''),
+       (15, '2024-01-10 10:00:00', FALSE, '')
 ;
 
 INSERT INTO scheduled_visits (tree_request_id, event_timestamp, cancelled, notes, organization_member_id)
-VALUES (13, '2024-10-09 08:00:00', FALSE, '', 1),
-       (14, '2025-01-07 09:00:00', FALSE, '', 2),
-       (15, '2024-01-12 10:30:00', TRUE, 'Commuting is too hazardous with a frozen road', 11),
+VALUES (2, '2024-10-09 08:00:00', FALSE, '', 1),
+       (3, '2024-9-29 08:00:00', FALSE, '', 11),
+       (4, '2024-05-05 08:00:00', FALSE, '', 2),
+       (5, '2024-02-09 08:00:00', FALSE, '', 13),
+       (6, '2024-05-09 08:00:00', FALSE, '', 18),
+       (7, '2024-09-09 08:00:00', FALSE, '', 18),
+       (10, '2025-02-01 08:00:00', FALSE, '', 1),
+       (11, '2024-12-09 08:00:00', FALSE, '', 10),
+       (12, '2025-01-09 08:00:00', FALSE, '', 1),
+       (13, '2024-10-15 08:00:00', FALSE, '', 1),
+       (14, '2024-08-07 09:00:00', FALSE, '', 2),
+       (15, '2024-01-09 10:30:00', TRUE, 'Commuting is too hazardous with a frozen road', 11),
        (16, '2024-03-03 13:00:00', TRUE, 'The weather is stormy', 15),
        (17, '2024-08-23 06:00:00', FALSE, '', 13),
        (18, '2025-02-06 11:00:00', FALSE, 'Area may be bigger than anticipated', 18),
@@ -467,22 +476,28 @@ VALUES (13, '2024-10-09 08:00:00', FALSE, '', 1),
        (21, '2025-01-14 12:00:00', FALSE, '', 2),
        (22, '2024-07-22 07:00:00', FALSE, '', 10),
        (23, '2024-01-02 12:00:00', FALSE, '', 10),
-       (24, '2024-06-05 12:00:00', FALSE, '', 18),
-       (25, '2024-11-09 17:00:00', FALSE, '', 1)
+       (24, '2024-06-05 12:00:00', FALSE, '', 18)
 ;
 
 INSERT INTO visit_events (scheduled_visit_id, observations, photo_library_link, additional_visit_required)
 VALUES (13, 'Area appears to not have a lot of planting area', '', TRUE),
        (14, 'Area seems to be in good condition for planting', '', FALSE),
-       (17, 'Area seems to have some debris, preventing planting', '', TRUE),
-       (18, 'Area seems to have some debris, preventing planting', '', TRUE),
-       (19, 'Area seems to be in good condition for planting', '', FALSE),
-       (21, 'Area seems to be in good condition for planting', '', FALSE),
-       (22, 'Area is too small', '', TRUE),
+       (15, 'Area seems to have some debris, preventing planting', '', TRUE),
+       (16, 'Area seems to have some debris, preventing planting', '', TRUE),
+       (17, 'Area seems to be in good condition for planting', '', FALSE),
+       (18, 'Area seems to be in good condition for planting', '', FALSE),
+       (19, 'Area is too small', '', TRUE),
+       (20, 'Area seems to be in good condition for planting', '', FALSE),
+       (21, 'Area is too small', '', TRUE),
+       (22, 'Area seems to be in good condition for planting, may be too small', '', FALSE),
        (23, 'Area seems to be in good condition for planting', '', FALSE),
-       (24, 'Area is too small', '', TRUE),
-       (25, 'Area seems to be in good condition for planting, may be too small', '', FALSE)
-;
+       (26, 'Area seems to be in good condition for planting', '', FALSE),
+       (27, 'Area seems to be in good condition for planting', '', FALSE),
+       (28, 'Area seems to be in good condition for planting', '', FALSE),
+       (30, 'Area seems to be in good condition for planting', '', FALSE),
+       (31, 'Area seems to be in good condition for planting', '', FALSE),
+       (32, 'Area seems to be in good condition for planting', '', FALSE),
+       (33, 'Area seems to be in good condition for planting', '', TRUE)
 
 
 INSERT INTO planting_events (scheduled_planting_id, observations, before_photos_library_link, after_photos_library_link,
