@@ -129,53 +129,41 @@ GROUP BY t.common_name;
 -- year that had the most trees of the species planted and the number of trees planted.
 -- https://www.scaler.com/topics/datediff-in-postgresql/
 
--- chisos red oak tree appears twice so the years_with_most_planted is not working correctly
-
-WITH years_with_most_planted AS (SELECT t.id,
-                                        EXTRACT(YEAR FROM sp.event_timestamp::DATE) AS year_planted
-                                 FROM trees t
-                                          JOIN tree_requests tr
-                                               ON t.id = tr.tree_id
-                                          JOIN scheduled_plantings sp
-                                               ON tr.id = sp.tree_request_id
-                                          JOIN planting_events pe
-                                               ON sp.event_id = pe.scheduled_planting_id
-                                 WHERE pe.successful = TRUE
-                                 GROUP BY t.id, sp.event_timestamp),
-     number_of_planted_for_peak_year AS (SELECT t.id,
-                                                COUNT(*) AS count
-                                         FROM trees t
-                                                  JOIN tree_requests tr
-                                                       ON t.id = tr.tree_id
-                                                  JOIN scheduled_plantings sp
-                                                       ON tr.id = sp.tree_request_id
-                                                  JOIN planting_events pe
-                                                       ON sp.event_id = pe.scheduled_planting_id
-                                                  JOIN years_with_most_planted ymp
-                                                       ON t.id = ymp.id
-                                         WHERE pe.successful = TRUE
-                                           AND EXTRACT(YEAR FROM sp.event_timestamp::DATE) = ymp.year_planted
-                                         GROUP BY t.id)
 SELECT t.common_name,
-       COUNT(tr.id)                                                                       AS number_of_trees_planted,
+       COUNT(pe)                                                                       AS number_of_trees_planted,
        MIN(EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM sp.event_timestamp::DATE)) AS years_since_planting,
-       ymp.year_planted AS peak_planting_year,
-       nppy.count AS number_planted_in_peak_year
+       (SELECT
+            EXTRACT(YEAR FROM sp2.event_timestamp::TIMESTAMP)
+        FROM
+            trees AS t2
+                INNER JOIN tree_requests ON t2.id = tree_requests.tree_id
+                INNER JOIN scheduled_plantings sp2 ON tree_requests.id = sp2.tree_request_id
+                INNER JOIN planting_events pe2 ON sp2.event_id = pe2.scheduled_planting_id
+        WHERE
+              t2.id = t.id
+          AND pe2.successful = TRUE
+        GROUP BY EXTRACT(YEAR FROM sp2.event_timestamp::TIMESTAMP)
+        ORDER BY COUNT(*) DESC
+        LIMIT 1)                                                                          AS year_most_planted,
+       (SELECT
+            COUNT(*)
+        FROM
+            trees AS t2
+                INNER JOIN tree_requests ON t2.id = tree_requests.tree_id
+                INNER JOIN scheduled_plantings sp2 ON tree_requests.id = sp2.tree_request_id
+                INNER JOIN planting_events pe2 ON sp2.event_id = pe2.scheduled_planting_id
+        WHERE
+              t2.id = t.id
+          AND pe2.successful = TRUE
+        GROUP BY EXTRACT(YEAR FROM sp2.event_timestamp::TIMESTAMP)
+        ORDER BY COUNT(*) DESC
+        LIMIT 1)                                                                          AS num_planted_in_peak_year
 FROM trees t
-         JOIN tree_requests tr
-              ON t.id = tr.tree_id
-         JOIN scheduled_plantings sp
-              ON tr.id = sp.tree_request_id
-         JOIN planting_events pe
-              ON sp.event_id = pe.scheduled_planting_id
-                  AND pe.successful = TRUE
-         JOIN years_with_most_planted ymp
-              ON t.id = ymp.id
-         JOIN number_of_planted_for_peak_year nppy
-              ON t.id = nppy.id
-GROUP BY t.common_name, ymp.year_planted, nppy.count
-ORDER BY number_of_trees_planted DESC;
-
+    INNER JOIN tree_requests tr ON t.id = tr.tree_id
+    INNER JOIN scheduled_plantings sp ON tr.id = sp.tree_request_id
+    INNER JOIN planting_events pe ON sp.event_id = pe.scheduled_planting_id
+WHERE pe.successful = TRUE
+GROUP BY t.common_name, t.id;
 
 -- For each Oakland neighborhood, create a report that summarizes the requests, their progress
 -- (pending, in-process, completed, ec), the trees planted, etc. This is an opportunity for your
