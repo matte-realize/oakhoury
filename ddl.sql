@@ -11,7 +11,7 @@ CREATE TABLE residents
     first_name   VARCHAR(50) NOT NULL,
     last_name    VARCHAR(50) NOT NULL,
     email        VARCHAR(100) UNIQUE NOT NULL,
-    password     VARCHAR(50),
+    password     VARCHAR(128), -- Argon-2 max hash length
     street       VARCHAR(50),
     zip_code     CHAR(5),
     is_volunteer BOOLEAN,
@@ -145,3 +145,40 @@ CREATE TABLE planting_events_have_volunteers
     volunteer_id      INTEGER REFERENCES residents (id) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (planting_event_id, volunteer_id)
 );
+
+
+-- Get the status of a tree
+-- https://neon.tech/postgresql/postgresql-plpgsql/postgresql-create-function
+CREATE OR REPLACE FUNCTION get_tree_request_status(p_tree_request_id INTEGER)
+    RETURNS TEXT
+AS
+$$
+DECLARE
+    v_status TEXT;
+BEGIN
+    SELECT
+        -- https://www.w3schools.com/sql/sql_case.asp
+        CASE
+            WHEN pe.successful IS TRUE THEN 'completed'
+            WHEN ve.additional_visit_required IS FALSE THEN 'waiting for planting'
+            WHEN p.status = 'approved' THEN 'waiting for visit'
+            WHEN tr.approved IS TRUE THEN 'needs permit'
+            WHEN tr.approved IS FALSE THEN 'denied'
+            ELSE 'pending approval'
+            END
+    INTO v_status
+    FROM tree_requests tr
+             LEFT JOIN permits p
+                       ON tr.id = p.tree_request_id
+             LEFT JOIN scheduled_visits sv
+                       ON tr.id = sv.tree_request_id
+             LEFT JOIN visit_events ve
+                       ON sv.event_id = ve.scheduled_visit_id
+             LEFT JOIN scheduled_plantings sp
+                       ON tr.id = sp.tree_request_id
+             LEFT JOIN planting_events pe
+                       ON sp.event_id = pe.scheduled_planting_id
+    WHERE tr.id = p_tree_request_id;
+    RETURN v_status;
+END;
+$$ LANGUAGE plpgsql;
