@@ -50,38 +50,42 @@ ORDER BY trees_planted_in_peak_year DESC, trees_planted DESC;
 -- to lower level organization members.
 
 SELECT
-    r.first_name || ' ' || r.last_name,
-    COUNT(ompe) AS plantings_led,
+    r.first_name || ' ' || r.last_name AS org_member_name,
+    COUNT(sp) AS plantings_led,
+    COUNT(pe) AS successful_plantings_led,
     (SELECT
-         DATE_PART('Year', sp2.event_timestamp)
+         EXTRACT(YEAR FROM sp2.event_timestamp::TIMESTAMP)
      FROM
          organization_members_lead_scheduled_plantings AS ompe2
-             INNER JOIN planting_events AS p2 ON ompe2.scheduled_planting_id = p2.scheduled_planting_id
-             INNER JOIN scheduled_plantings AS sp2 ON p2.scheduled_planting_id = sp2.event_id
+             INNER JOIN scheduled_plantings sp2 ON ompe2.scheduled_planting_id = sp2.event_id
+             INNER JOIN planting_events pe2 ON sp2.event_id = pe2.scheduled_planting_id
      WHERE
-         ompe2.organization_member_id = r.id
-     GROUP BY DATE_PART('Year', sp2.event_timestamp)
+             ompe2.organization_member_id = om.resident_id
+         AND pe2.successful = TRUE
+     GROUP BY EXTRACT(YEAR FROM sp2.event_timestamp::TIMESTAMP)
      ORDER BY COUNT(*) DESC
      LIMIT 1)   AS plantings_led_peak_year,
-    COUNT(sv)   AS visits_attended,
     (SELECT
          COUNT(*)
      FROM
          organization_members_lead_scheduled_plantings AS ompe2
-             INNER JOIN planting_events AS p2 ON ompe2.scheduled_planting_id = p2.scheduled_planting_id
-             INNER JOIN scheduled_plantings AS sp2 ON p2.scheduled_planting_id = sp2.event_id
+             INNER JOIN scheduled_plantings sp2 ON ompe2.scheduled_planting_id = sp2.event_id
+             INNER JOIN planting_events pe2 ON sp2.event_id = pe2.scheduled_planting_id
      WHERE
-         ompe2.organization_member_id = r.id
-     GROUP BY DATE_PART('Year', sp2.event_timestamp)
+             ompe2.organization_member_id = om.resident_id
+         AND pe2.successful = TRUE
+     GROUP BY EXTRACT(YEAR FROM sp2.event_timestamp::TIMESTAMP)
      ORDER BY COUNT(*) DESC
      LIMIT 1)   AS plantings_led_in_peak_year,
+    COUNT(sv)   AS visits_attended,
     (SELECT
-         DATE_PART('Year', sv2.event_timestamp)
+         EXTRACT(YEAR FROM sv2.event_timestamp::TIMESTAMP)
      FROM
          scheduled_visits AS sv2
      WHERE
-         sv2.organization_member_id = om.resident_id
-     GROUP BY DATE_PART('Year', sv2.event_timestamp)
+             sv2.organization_member_id = om.resident_id
+         AND sv2.cancelled = FALSE
+     GROUP BY EXTRACT(YEAR FROM sv2.event_timestamp::TIMESTAMP)
      ORDER BY COUNT(*) DESC
      LIMIT 1)   AS visits_attended_peak_year,
     (SELECT
@@ -89,19 +93,22 @@ SELECT
      FROM
          scheduled_visits AS sv2
      WHERE
-         sv2.organization_member_id = om.resident_id
-     GROUP BY DATE_PART('Year', sv2.event_timestamp)
+           sv2.organization_member_id = om.resident_id
+       AND sv2.cancelled = FALSE
+     GROUP BY EXTRACT(YEAR FROM sv2.event_timestamp::TIMESTAMP)
      ORDER BY COUNT(*) DESC
      LIMIT 1)   AS visits_attended_in_peak_year
 FROM
     organization_members AS om
         INNER JOIN residents AS r ON om.resident_id = r.id
-        INNER JOIN organization_members_lead_scheduled_plantings AS ompe ON om.resident_id = ompe.organization_member_id
-        INNER JOIN scheduled_visits AS sv ON om.resident_id = sv.organization_member_id
+        LEFT OUTER JOIN organization_members_lead_scheduled_plantings AS ompe ON om.resident_id = ompe.organization_member_id
+        LEFT OUTER JOIN scheduled_visits AS sv ON om.resident_id = sv.organization_member_id AND sv.cancelled = FALSE
+        INNER JOIN scheduled_plantings AS sp ON ompe.scheduled_planting_id = sp.event_id
+        LEFT OUTER JOIN planting_events AS pe ON sp.event_id = pe.scheduled_planting_id AND pe.successful = TRUE
+WHERE
+    sp.cancelled = FALSE
 GROUP BY r.first_name, r.last_name, r.id, om.resident_id
 ORDER BY plantings_led DESC, visits_attended DESC;
-
-
 
 SELECT
     t.common_name,
