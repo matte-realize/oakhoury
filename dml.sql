@@ -424,7 +424,9 @@ VALUES (3, '2024-07-03 07:04:06', 42, 'Contains large area for planting', FALSE)
        (30, '2023-05-09 12:35:25', 5, '', TRUE),
        (31, '2024-02-14 01:11:11', 9, 'Contains large area for planting', TRUE),
        (32, '2024-06-11 12:54:50', 52, 'Contains small area for planting', TRUE),
-       (33, '2024-03-04 09:12:20', 30, '', TRUE)
+       (33, '2024-03-04 09:12:20', 30, '', TRUE),
+       (4, '2024-09-01 17:23:12', 55, '', TRUE),
+       (3, '2024-07-17 22:15:49', 55, '', TRUE)
 ;
 
 INSERT INTO permits (resident_id, tree_request_id, status, decision_date)
@@ -452,7 +454,9 @@ VALUES (2, '2024-10-10 12:00:00', FALSE, 'Area is fertilized'),
        (12, '2025-02-15 12:00:00', FALSE, ''),
        (13, '2024-12-11 14:00:00', FALSE, 'Area is fertilized'),
        (14, '2024-10-01 17:00:00', FALSE, ''),
-       (15, '2024-01-10 10:00:00', FALSE, '')
+       (15, '2024-01-10 10:00:00', FALSE, ''),
+       (25, '2024-09-03 10:00:00', FALSE,''),
+       (26, '2024-07-19 10:00:00', FALSE, '')
 ;
 
 INSERT INTO scheduled_visits (tree_request_id, event_timestamp, cancelled, notes, organization_member_id)
@@ -476,28 +480,30 @@ VALUES (2, '2024-10-09 08:00:00', FALSE, '', 1),
        (21, '2025-01-14 12:00:00', FALSE, '', 2),
        (22, '2024-07-22 07:00:00', FALSE, '', 10),
        (23, '2024-01-02 12:00:00', FALSE, '', 10),
-       (24, '2024-06-05 12:00:00', FALSE, '', 18)
+       (24, '2024-06-05 12:00:00', FALSE, '', 18),
+       (25, '2024-09-02 12:00:00', FALSE, '', 18),
+       (26, '2024-07-18 22:15:49', FALSE, '', 18)
 ;
 
 INSERT INTO visit_events (scheduled_visit_id, observations, photo_library_link, additional_visit_required)
-VALUES (13, 'Area appears to not have a lot of planting area', '', TRUE),
-       (14, 'Area seems to be in good condition for planting', '', FALSE),
-       (15, 'Area seems to have some debris, preventing planting', '', TRUE),
-       (16, 'Area seems to have some debris, preventing planting', '', TRUE),
-       (17, 'Area seems to be in good condition for planting', '', FALSE),
-       (18, 'Area seems to be in good condition for planting', '', FALSE),
-       (19, 'Area is too small', '', TRUE),
+VALUES (15, 'Area appears to not have a lot of planting area', '', TRUE),
+       (16, 'Area seems to be in good condition for planting', '', FALSE),
+       (17, 'Area seems to have some debris, preventing planting', '', TRUE),
+       (18, 'Area seems to have some debris, preventing planting', '', TRUE),
+       (19, 'Area seems to be in good condition for planting', '', FALSE),
        (20, 'Area seems to be in good condition for planting', '', FALSE),
        (21, 'Area is too small', '', TRUE),
-       (22, 'Area seems to be in good condition for planting, may be too small', '', FALSE),
-       (23, 'Area seems to be in good condition for planting', '', FALSE),
-       (26, 'Area seems to be in good condition for planting', '', FALSE),
-       (27, 'Area seems to be in good condition for planting', '', FALSE),
+       (22, 'Area seems to be in good condition for planting', '', FALSE),
+       (23, 'Area is too small', '', TRUE),
+       (24, 'Area seems to be in good condition for planting, may be too small', '', FALSE),
+       (25, 'Area seems to be in good condition for planting', '', FALSE),
        (28, 'Area seems to be in good condition for planting', '', FALSE),
+       (29, 'Area seems to be in good condition for planting', '', FALSE),
        (30, 'Area seems to be in good condition for planting', '', FALSE),
-       (31, 'Area seems to be in good condition for planting', '', FALSE),
        (32, 'Area seems to be in good condition for planting', '', FALSE),
-       (33, 'Area seems to be in good condition for planting', '', TRUE)
+       (33, 'Area seems to be in good condition for planting', '', FALSE),
+       (34, 'Area seems to be in good condition for planting', '', FALSE),
+       (35, 'Area seems to be in good condition for planting', '', TRUE)
 
 
 INSERT INTO planting_events (scheduled_planting_id, observations, before_photos_library_link, after_photos_library_link,
@@ -511,7 +517,9 @@ VALUES (1, 'Plant shows signs of fruit', '', '', TRUE),
        (9, 'Weed is around the tree', '', '', TRUE),
        (10, 'Soil was not able to be dug into', '', '', FALSE),
        (11, 'Foliage', '', '', TRUE),
-       (12, 'Lots of cones were dropped', '', '', TRUE)
+       (12, 'Lots of cones were dropped', '', '', TRUE),
+       (13, 'Plant shows signs of fruit', '', '', TRUE),
+       (14, 'Plant shows signs of frui', '', '', TRUE)
 ;
 
 INSERT INTO organization_members_lead_scheduled_plantings (organization_member_id, scheduled_planting_id)
@@ -524,7 +532,9 @@ VALUES (23, 1),
        (10, 9),
        (10, 10),
        (18, 11),
-       (15, 12)
+       (15, 12),
+       (23, 13),
+       (23, 14)
 ;
 
 INSERT INTO scheduled_plantings_have_volunteers (planting_event_id, volunteer_id)
