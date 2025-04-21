@@ -131,7 +131,7 @@ GROUP BY t.common_name;
 
 SELECT t.common_name,
        COUNT(pe)                                                                       AS number_of_trees_planted,
-       MIN(EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM sp.event_timestamp::DATE)) AS years_since_planting,
+       MIN(EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM sp.event_timestamp::TIMESTAMP)) AS years_since_planting,
        (SELECT
             EXTRACT(YEAR FROM sp2.event_timestamp::TIMESTAMP)
         FROM
