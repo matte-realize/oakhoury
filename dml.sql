@@ -402,11 +402,11 @@ VALUES ('African fern pine', 'Afrocarpus graciliar', INT4RANGE(40, 60), INT4RANG
 INSERT INTO tree_requests (resident_id, submission_timestamp, tree_id, site_description, approved)
 VALUES (3, '2024-07-03 07:04:06', 42, 'Contains large area for planting', FALSE),
        (4, '2024-08-31 21:15:49', 55, '', TRUE),
-       (5, '2024-08-08 15:46:12', 12, 'Contains small area for planting', TRUE),
+       (5, '2024-12-08 15:46:12', 12, 'Contains small area for planting', TRUE),
        (6, '2023-12-10 11:21:54', 64, '', TRUE),
        (8, '2023-10-11 04:06:38', 9, 'Contains large area for planting', TRUE),
-       (20, '2024-02-02 01:02:03', 11, 'Contains large area for planting', TRUE),
-       (14, '2024-01-01 12:34:21', 36, 'Contains small area for planting', TRUE),
+       (20, '2024-07-02 01:02:03', 11, 'Contains large area for planting', TRUE),
+       (14, '2025-01-01 12:34:21', 36, 'Contains small area for planting', TRUE),
        (15, '2024-06-22 07:12:45', 11, 'Contains small area for planting', FALSE),
        (21, '2024-04-12 17:23:30', 12, '', FALSE),
        (19, '2024-10-03 07:06:28', 1, 'Contains large area for planting', FALSE),
@@ -414,16 +414,17 @@ VALUES (3, '2024-07-03 07:04:06', 42, 'Contains large area for planting', FALSE)
        (17, '2024-05-06 20:10:39', 16, '', TRUE),
        (18, '2025-01-01 15:46:12', 42, 'Contains small area for planting', TRUE),
        (19, '2024-07-10 14:05:09', 15, 'Contains large area for planting', TRUE),
-       (22, '2024-08-06 12:04:28', 25, '', TRUE),
-       (24, '2023-02-08 01:12:09', 30, '', TRUE),
-       (25, '2024-02-15 09:15:24', 32, 'Contains large area for planting', TRUE),
+       (22, '2024-9-15 12:04:28', 25, '', TRUE),
+       (24, '2025-02-08 01:12:09', 30, '', TRUE),
+       (25, '2025-02-15 09:15:24', 32, 'Contains large area for planting', TRUE),
        (26, '2024-02-12 08:08:08', 8, 'Contains large area for planting', TRUE),
        (27, '2024-05-14 10:50:21', 6, 'Contains small area for planting', TRUE),
        (28, '2023-07-12 09:00:00', 8, '', TRUE),
        (29, '2023-04-01 18:22:23', 1, 'Contains large area for planting', TRUE),
        (30, '2023-05-09 12:35:25', 5, '', TRUE),
-       (31, '2023-02-14 01:11:11', 9, 'Contains large area for planting', TRUE),
-       (32, '2023-06-11 12:54:50', 52, 'Contains small area for planting', TRUE),
+       (31, '2024-02-14 01:11:11', 9, 'Contains large area for planting', TRUE),
+       (32, '2024-06-11 12:54:50', 52, 'Contains small area for planting', TRUE),
+       (33, '2024-03-04 09:12:20', 30, '', TRUE)
 ;
 
 INSERT INTO permits (resident_id, tree_request_id, status, decision_date)
@@ -440,33 +441,24 @@ VALUES (3, 1, 'denied', '2024-07-05'),
 ;
 
 INSERT INTO scheduled_plantings (tree_request_id, event_timestamp, cancelled, notes)
-VALUES (2, '2024-10-10 12:00:00', FALSE, 'Area is fertilized'),
-       (3, '2024-09-30 06:00:00', FALSE, 'Area contains a few weeds'),
-       (4, '2024-06-06 12:00:00', FALSE, ''),
-       (5, '2024-03-05 13:00:00', TRUE, 'Area is fertilized'),
+VALUES (1, '2024-10-10 12:00:00', FALSE, 'Area is fertilized'),
+       (2, '2024-09-30 06:00:00', FALSE, 'Area contains a few weeds'),
+       (3, '2024-06-06 12:00:00', FALSE, ''),
+       (4, '2024-03-05 13:00:00', TRUE, 'Area is fertilized'),
+       (5, '2024-09-14 09:00:00', FALSE, ''),
        (6, '2025-03-05 11:00:00', FALSE, 'Area is fertilized'),
-       (7, '2024-09-14 09:00:00', FALSE, ''),
-       (10, '2025-02-05 07:00:00', FALSE, 'Area is fertilized'),
-       (11, '2025-01-01 09:00:00', TRUE, 'Area contains a few weeds'),
-       (12, '2025-02-15 12:00:00', FALSE, ''),
-       (13, '2024-12-11 14:00:00', FALSE, 'Area is fertilized'),
-       (14, '2024-10-01 17:00:00', FALSE, ''),
-       (15, '2024-01-10 10:00:00', FALSE, '')
+       (7, '2025-02-05 07:00:00', FALSE, 'Area is fertilized'),
+       (8, '2025-01-01 09:00:00', TRUE, 'Area contains a few weeds'),
+       (9, '2025-02-15 12:00:00', FALSE, ''),
+       (10, '2024-12-11 14:00:00', FALSE, 'Area is fertilized'),
+       (11, '2024-10-01 17:00:00', FALSE, ''),
+       (12, '2024-03-12 10:00:00', FALSE, '')
 ;
 
 INSERT INTO scheduled_visits (tree_request_id, event_timestamp, cancelled, notes, organization_member_id)
-VALUES (2, '2024-10-09 08:00:00', FALSE, '', 1),
-       (3, '2024-9-29 08:00:00', FALSE, '', 11),
-       (4, '2024-05-05 08:00:00', FALSE, '', 2),
-       (5, '2024-02-09 08:00:00', FALSE, '', 13),
-       (6, '2024-05-09 08:00:00', FALSE, '', 18),
-       (7, '2024-09-09 08:00:00', FALSE, '', 18),
-       (10, '2025-02-01 08:00:00', FALSE, '', 1),
-       (11, '2024-12-09 08:00:00', FALSE, '', 10),
-       (12, '2025-01-09 08:00:00', FALSE, '', 1),
-       (13, '2024-10-15 08:00:00', FALSE, '', 1),
-       (14, '2024-08-07 09:00:00', FALSE, '', 2),
-       (15, '2024-01-09 10:30:00', TRUE, 'Commuting is too hazardous with a frozen road', 11),
+VALUES (13, '2024-10-09 08:00:00', FALSE, '', 1),
+       (14, '2025-01-07 09:00:00', FALSE, '', 2),
+       (15, '2024-01-12 10:30:00', TRUE, 'Commuting is too hazardous with a frozen road', 11),
        (16, '2024-03-03 13:00:00', TRUE, 'The weather is stormy', 15),
        (17, '2024-08-23 06:00:00', FALSE, '', 13),
        (18, '2025-02-06 11:00:00', FALSE, 'Area may be bigger than anticipated', 18),
@@ -475,25 +467,21 @@ VALUES (2, '2024-10-09 08:00:00', FALSE, '', 1),
        (21, '2025-01-14 12:00:00', FALSE, '', 2),
        (22, '2024-07-22 07:00:00', FALSE, '', 10),
        (23, '2024-01-02 12:00:00', FALSE, '', 10),
-       (24, '2024-06-05 12:00:00', FALSE, '', 18)
+       (24, '2024-06-05 12:00:00', FALSE, '', 18),
+       (25, '2024-11-09 17:00:00', FALSE, '', 1)
 ;
 
 INSERT INTO visit_events (scheduled_visit_id, observations, photo_library_link, additional_visit_required)
-VALUES (1, 'Area appears to not have a lot of planting area', '', TRUE),
-       (2, 'Area seems to be in good condition for planting', '', FALSE),
-       (3, 'Area seems to have some debris, preventing planting', '', TRUE),
-       (4, 'Area seems to have some debris, preventing planting', '', TRUE),
-       (5, 'Area seems to be in good condition for planting', '', FALSE),
-       (6, 'Area seems to be in good condition for planting', '', FALSE),
-       (10, 'Area is too small', '', TRUE),
-       (11, 'Area seems to be in good condition for planting', '', FALSE),
-       (14, 'Area is too small', '', TRUE),
-       (15, 'Area seems to be in good condition for planting, may be too small', '', FALSE),
-       (16, 'Area seems to be in good condition for planting', '', FALSE),
-       (18, 'Area seems to be in good condition for planting', '', FALSE),
+VALUES (13, 'Area appears to not have a lot of planting area', '', TRUE),
+       (14, 'Area seems to be in good condition for planting', '', FALSE),
+       (17, 'Area seems to have some debris, preventing planting', '', TRUE),
+       (18, 'Area seems to have some debris, preventing planting', '', TRUE),
        (19, 'Area seems to be in good condition for planting', '', FALSE),
-       (20, 'Area seems to be in good condition for planting', '', FALSE),
-       (21, 'Area seems to be in good condition for planting', '', FALSE)
+       (21, 'Area seems to be in good condition for planting', '', FALSE),
+       (22, 'Area is too small', '', TRUE),
+       (23, 'Area seems to be in good condition for planting', '', FALSE),
+       (24, 'Area is too small', '', TRUE),
+       (25, 'Area seems to be in good condition for planting, may be too small', '', FALSE)
 ;
 
 
@@ -526,32 +514,25 @@ VALUES (23, 1),
 
 INSERT INTO scheduled_plantings_have_volunteers (planting_event_id, volunteer_id)
 VALUES (1, 4),
-       (1, 3),
-       (2, 4),
+       (2, 8),
        (3, 14),
-       (3, 5),
-       (3, 8),
-       (5, 3),
-       (6, 14),
-       (6, 22),
-       (7, 22),
-       (9, 24),
-       (10, 25),
-       (11, 27),
-       (12, 3),
-       (12, 27)
+       (4, 3),
+       (5, 22),
+       (6, 27),
+       (7, 25),
+       (8, 25),
+       (9, 14),
+       (10, 3)
 ;
 
 INSERT INTO planting_events_have_volunteers (planting_event_id, volunteer_id)
 VALUES (1, 3),
        (2, 4),
-       (3, 14),
        (3, 5),
-       (3, 8),
+       (5, 8),
        (6, 14),
        (7, 22),
        (9, 24),
        (10, 25),
        (11, 27),
        (12, 27)
-;
