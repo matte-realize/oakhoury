@@ -11,3 +11,9 @@ https://lucid.app/lucidchart/be7d4afb-c425-4e1d-869c-bdeaad5d1f40/edit?invitatio
 The RDB diagram outlines the database schema, detailing tables, relationships, and constraints within our relationa database. The RDB diagram can be viewed using the link below:
 
 https://lucid.app/lucidchart/be7d4afb-c425-4e1d-869c-bdeaad5d1f40/edit?invitationId=inv_bd4086c9-7db2-439b-920c-62f202529b7d&page=.~P35cu.5UbE#
+
+## YouTube Demos
+
+The following links provide the demos for using and setting up the web app:
+https://youtu.be/GMLtf2KH8pA
+https://youtu.be/YlKf3BBqnLc
