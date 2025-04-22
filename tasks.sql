@@ -169,17 +169,38 @@ GROUP BY t.common_name, t.id;
 -- (pending, in-process, completed, ec), the trees planted, etc. This is an opportunity for your
 -- team to demonstrate your skills, so it's expected that you'll demonstrate sophisticated database
 -- querying skills
-SELECT n.name,
-       t.common_name,
-       tr.id AS tree_request_id,
-       get_tree_request_status(tr.id) AS request_status,
-       tr.site_description
+SELECT n.name AS neighborhood_name,
+       COUNT (spe) AS num_of_planted_trees,
+       COUNT(tr) AS num_of_requests,
+       COUNT(ctr) AS num_of_completed_requests,
+       COUNT(wfptr) AS num_of_requests_waiting_for_planting,
+       COUNT(wfvtr) AS num_of_requests_waiting_for_visit,
+       COUNT(nptr) AS num_of_requests_needs_permit,
+       COUNT(dtr) AS num_of_denied_requests,
+       COUNT(patr) AS num_of_requests_pending_approval
 FROM neighborhoods n
     INNER JOIN residents r
                ON n.name = r.neighborhood
     INNER JOIN tree_requests tr
                ON r.id = tr.resident_id
+    LEFT OUTER JOIN scheduled_plantings sp
+                ON tr.id = sp.tree_request_id
+    LEFT OUTER JOIN planting_events spe
+                        ON sp.event_id = spe.scheduled_planting_id
+                               AND spe.successful = TRUE
     INNER JOIN trees t
                ON tr.tree_id = t.id
-GROUP BY n.name, tr.id, t.common_name
-ORDER BY n.name ASC;
+    LEFT OUTER JOIN tree_requests ctr ON tr.id = ctr.id
+        AND get_tree_request_status(ctr.id) = 'completed'
+    LEFT OUTER JOIN tree_requests wfptr ON tr.id = wfptr.id
+        AND get_tree_request_status(wfptr.id) = 'waiting for planting'
+    LEFT OUTER JOIN tree_requests wfvtr ON tr.id = wfvtr.id
+        AND get_tree_request_status(wfvtr.id) = 'waiting for visit'
+    LEFT OUTER JOIN tree_requests nptr ON tr.id = nptr.id
+        AND get_tree_request_status(nptr.id) = 'needs permit'
+    LEFT OUTER JOIN tree_requests dtr ON tr.id = dtr.id
+        AND get_tree_request_status(dtr.id) = 'denied'
+    LEFT OUTER JOIN tree_requests patr ON tr.id = patr.id
+        AND get_tree_request_status(patr.id) = 'pending approval'
+GROUP BY neighborhood_name
+ORDER BY neighborhood_name ASC;

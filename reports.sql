@@ -123,7 +123,8 @@ ORDER BY plantings_led DESC, visits_attended DESC;
 -- The following query gives us a report regarding the total number of trees planted in neighborhood where they have been
 -- planted previously, the number planted in said neighborhood this year, as well as the peak year of planting in that
 -- neighborhood and the number planted during this year. This data is important for the organization so they can keep
--- track of where the planted trees have gone, and monitor the amount that gets planted in each neighborhood.
+-- track of where the planted trees have gone, and monitor the amount that gets planted in each neighborhood. The query
+-- is parameterized via the common name of the tree, so that data can be accessed and looked through efficiently.
 
 SELECT
     t.common_name,
@@ -186,3 +187,4 @@ WHERE
     AND t.common_name = :p_tree_name
 GROUP BY t.common_name, r.neighborhood, t.id
 ORDER BY t.common_name ASC;
+
