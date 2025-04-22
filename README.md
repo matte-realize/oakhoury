@@ -15,5 +15,7 @@ https://lucid.app/lucidchart/be7d4afb-c425-4e1d-869c-bdeaad5d1f40/edit?invitatio
 ## YouTube Demos
 
 The following links provide the demos for using and setting up the web app:
+
 https://youtu.be/GMLtf2KH8pA
+
 https://youtu.be/YlKf3BBqnLc
