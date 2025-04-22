@@ -181,6 +181,8 @@ FROM
         INNER JOIN residents r ON tr.resident_id = r.id
         INNER JOIN scheduled_plantings sp ON tr.id = sp.tree_request_id
         INNER JOIN planting_events pe ON sp.event_id = pe.scheduled_planting_id
-WHERE pe.successful = TRUE
+WHERE
+        pe.successful = TRUE
+    AND t.common_name = :p_tree_name
 GROUP BY t.common_name, r.neighborhood, t.id
 ORDER BY t.common_name ASC;
