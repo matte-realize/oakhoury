@@ -188,3 +188,29 @@ WHERE
 GROUP BY t.common_name, r.neighborhood, t.id
 ORDER BY t.common_name ASC;
 
+-- The following query is to help users figure out which tree that they would like to order, the user provides minimum
+-- and maximum values for both height and width, providing the top 5 trees (based on how many are left in inventory).
+-- This query is important to help less informed users figure out which tree they want to plant. It prioritizes high
+-- inventory so that rarer trees can be left for those who are more passionate about trees. This data is important
+-- because it increases the user experience for many users.
+
+WITH valid_trees AS (SELECT
+                        t.id,
+                        t.common_name,
+                        t.inventory
+                    FROM trees t
+                        INNER JOIN tree_requests tr
+                                    ON t.id = tr.tree_id
+                    WHERE
+                            LOWER(t.height_range) >= :p_min_height
+                        AND UPPER(t.height_range) <= :p_max_height
+                        AND LOWER(t.height_range) >= :p_min_width
+                        AND UPPER(t.height_range) <= :p_max_width
+GROUP BY t.id, t.common_name, t.inventory
+HAVING t.inventory - COUNT(tr) > 0)
+SELECT t.common_name
+FROM valid_trees t
+GROUP BY t.common_name, t.inventory
+HAVING (SELECT COUNT(*)
+        FROM valid_trees t2
+        WHERE t2.inventory >= t.inventory) <= 4;
