@@ -195,21 +195,24 @@ ORDER BY t.common_name ASC;
 -- because it increases the user experience for many users.
 
 WITH valid_trees AS (SELECT
-                        t.id,
-                        t.common_name,
-                        t.inventory
-                    FROM trees t
-                        INNER JOIN tree_requests tr
-                                    ON t.id = tr.tree_id
-                    WHERE
-                            LOWER(t.height_range) >= :p_min_height
-                        AND UPPER(t.height_range) <= :p_max_height
-                        AND LOWER(t.height_range) >= :p_min_width
-                        AND UPPER(t.height_range) <= :p_max_width
-GROUP BY t.id, t.common_name, t.inventory
-HAVING t.inventory - COUNT(tr) > 0)
-SELECT t.common_name
+                            t.id,
+                            t.common_name,
+                            t.inventory
+                        FROM trees t
+                            INNER JOIN tree_requests tr
+                                        ON t.id = tr.tree_id
+                        WHERE
+                                LOWER(t.height_range) >= :p_min_height
+                            AND UPPER(t.height_range) <= :p_max_height
+                            AND LOWER(t.height_range) >= :p_min_width
+                            AND UPPER(t.height_range) <= :p_max_width
+                        GROUP BY t.id, t.common_name, t.inventory
+                        HAVING t.inventory - COUNT(tr) > 0)
+SELECT t.common_name, COUNT(pe) AS num_planted
 FROM valid_trees t
+    INNER JOIN tree_requests tr ON t.id = tr.tree_id
+    LEFT OUTER JOIN scheduled_plantings sp ON tr.id = sp.tree_request_id
+    LEFT OUTER JOIN planting_events pe ON sp.event_id = pe.scheduled_planting_id AND pe.successful = TRUE
 GROUP BY t.common_name, t.inventory
 HAVING (SELECT COUNT(*)
         FROM valid_trees t2
