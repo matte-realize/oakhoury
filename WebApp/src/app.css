@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+@plugin "daisyui" {
+	themes: light --default;
+}
+
+@theme {
+	--color-bg: oklch(98% 1% 49deg);
+}
+
+html {
+	@apply bg-bg text-base-content;
+}
