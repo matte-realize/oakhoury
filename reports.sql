@@ -1,7 +1,11 @@
--- The following link helped me figure out how to extract that year from a timestamp
+-- The following link helped me figure out how to extract that year from a timestamp:
 -- https://www.commandprompt.com/education/how-to-extract-year-from-date-in-postgresql/#:~:text=To%20extract%20a%20year%20from%20a%20date%2C%20the%20built%2Din,dateField'%20FROM%20TIMESTAMP%20%7C%20INTERVAL%20)%3B
--- The following link taught me about the LIMIT keyword
+-- The following link taught me about the LIMIT keyword:
 -- https://razorsql.com/articles/postgresql_select_top_syntax.html#:~:text=Postgres%20does%20have%20a%20way,limit%20keyword%20must%20be%20used.&text=PostgreSQL%20also%20gives%20the%20ability,limit%20N%20offset%20Y%20syntax.
+-- The following link helped me learn about the WITH keyword:
+-- https://www.postgresql.org/docs/current/queries-with.html
+-- The following link helped me learn how to cast:
+-- https://stackoverflow.com/questions/28736227/cast-syntax-to-convert-a-sum-to-float
 
 -- The following query gets us a report about the most active volunteers, this is important because it helps the organization
 -- keep track of the impact that each volunteer has helped cause. Year has been parameterized so that the user can query
@@ -217,3 +221,34 @@ GROUP BY t.common_name, t.inventory
 HAVING (SELECT COUNT(*)
         FROM valid_trees t2
         WHERE t2.inventory >= t.inventory) <= 4;
+
+-- The following query shows how many tree plantings a volunteer has participated in, how many of the scheduled plantings
+-- that each volunteer has missed, and the success rate of all the plantings they have attended. This data is important
+-- because it allows the organization to keep track of how well each volunteer (that has attended or been scheduled
+-- for a planting) has done, so that the best volunteers can be scheduled for more difficult plantings.
+
+WITH scheduled_volunters AS (SELECT
+    r.first_name || ' ' || r.last_name AS volunteer_name,
+    COUNT(sp) AS num_plantings_scheduled_for
+FROM residents r
+     INNER JOIN scheduled_plantings_have_volunteers sphv ON r.id = sphv.volunteer_id
+     LEFT OUTER JOIN scheduled_plantings sp ON sphv.planting_event_id = sp.event_id AND sp.cancelled = FALSE
+WHERE is_volunteer = TRUE
+GROUP BY r.first_name, r.last_name),
+attended_volunteers AS (SELECT
+    r.first_name || ' ' || r.last_name AS volunteer_name,
+    COUNT(pehv) AS num_plantings_attended,
+    COUNT(spe) AS num_successful_plantings_attended
+FROM residents r
+         INNER JOIN planting_events_have_volunteers pehv ON r.id = pehv.volunteer_id
+         LEFT OUTER JOIN planting_events spe ON pehv.planting_event_id = spe.scheduled_planting_id AND spe.successful = TRUE
+WHERE is_volunteer = TRUE
+GROUP BY r.first_name, r.last_name)
+SELECT sv.volunteer_name,
+       av.num_plantings_attended,
+       (sv.num_plantings_scheduled_for - av.num_plantings_attended) AS num_plantings_missed,
+       (av.num_successful_plantings_attended::FLOAT / av.num_plantings_attended::FLOAT) AS success_rate_of_attended_plantings
+FROM scheduled_volunters sv
+    LEFT OUTER JOIN attended_volunteers av ON sv.volunteer_name = av.volunteer_name
+GROUP BY sv.volunteer_name, sv.num_plantings_scheduled_for, av.num_plantings_attended, av.num_successful_plantings_attended
+ORDER BY success_rate_of_attended_plantings ASC, num_plantings_missed DESC;
