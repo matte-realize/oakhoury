@@ -446,7 +446,7 @@ INSERT INTO scheduled_plantings (tree_request_id, event_timestamp, cancelled, no
 VALUES (2, '2024-10-10 12:00:00', FALSE, 'Area is fertilized'),
        (3, '2024-09-30 06:00:00', FALSE, 'Area contains a few weeds'),
        (4, '2024-06-06 12:00:00', FALSE, ''),
-       (5, '2024-03-05 13:00:00', TRUE, 'Area is not fertilized'),
+       (5, '2024-03-05 13:00:00', TRUE, 'Area is fertilized'),
        (6, '2025-03-05 11:00:00', FALSE, 'Area is fertilized'),
        (7, '2024-09-14 09:00:00', FALSE, ''),
        (10, '2025-02-05 07:00:00', FALSE, 'Area is fertilized'),
@@ -455,8 +455,8 @@ VALUES (2, '2024-10-10 12:00:00', FALSE, 'Area is fertilized'),
        (13, '2024-12-11 14:00:00', FALSE, 'Area is fertilized'),
        (14, '2024-10-01 17:00:00', FALSE, ''),
        (15, '2024-01-10 10:00:00', FALSE, ''),
-       (26, '2024-09-03 10:00:00', FALSE,''),
-       (27, '2024-07-19 10:00:00', FALSE, '')
+       (25, '2024-09-03 10:00:00', FALSE,''),
+       (26, '2024-07-19 10:00:00', FALSE, '')
 ;
 
 INSERT INTO scheduled_visits (tree_request_id, event_timestamp, cancelled, notes, organization_member_id)
@@ -504,6 +504,7 @@ VALUES (15, 'Area appears to not have a lot of planting area', '', TRUE),
        (33, 'Area seems to be in good condition for planting', '', FALSE),
        (34, 'Area seems to be in good condition for planting', '', FALSE),
        (35, 'Area seems to be in good condition for planting', '', TRUE)
+;
 
 
 INSERT INTO planting_events (scheduled_planting_id, observations, before_photos_library_link, after_photos_library_link,
@@ -519,7 +520,7 @@ VALUES (1, 'Plant shows signs of fruit', '', '', TRUE),
        (11, 'Foliage', '', '', TRUE),
        (12, 'Lots of cones were dropped', '', '', TRUE),
        (13, 'Plant shows signs of fruit', '', '', TRUE),
-       (14, 'Plant shows signs of fruit', '', '', TRUE)
+       (14, 'Plant shows signs of frui', '', '', TRUE)
 ;
 
 INSERT INTO organization_members_lead_scheduled_plantings (organization_member_id, scheduled_planting_id)
@@ -538,17 +539,16 @@ VALUES (23, 1),
 ;
 
 INSERT INTO scheduled_plantings_have_volunteers (planting_event_id, volunteer_id)
-VALUES (1, 3),
-       (2, 4),
-       (3, 5),
-       (4, 8),
-       (5, 14),
-       (6, 22),
-       (7, 24),
+VALUES (1, 4),
+       (2, 8),
+       (3, 14),
+       (4, 3),
+       (5, 22),
+       (6, 27),
+       (7, 25),
        (8, 25),
-       (9, 27),
-       (10, 3),
-       (10, 27)
+       (9, 14),
+       (10, 3)
 ;
 
 INSERT INTO planting_events_have_volunteers (planting_event_id, volunteer_id)
@@ -562,3 +562,4 @@ VALUES (1, 3),
        (10, 25),
        (11, 27),
        (12, 27)
+;
