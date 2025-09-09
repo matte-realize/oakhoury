@@ -199,19 +199,19 @@ ORDER BY t.common_name ASC;
 -- because it increases the user experience for many users.
 
 WITH valid_trees AS (SELECT
-                            t.id,
-                            t.common_name,
-                            t.inventory
-                        FROM trees t
-                            INNER JOIN tree_requests tr
-                                        ON t.id = tr.tree_id
-                        WHERE
-                                LOWER(t.height_range) >= :p_min_height
-                            AND UPPER(t.height_range) <= :p_max_height
-                            AND LOWER(t.height_range) >= :p_min_width
-                            AND UPPER(t.height_range) <= :p_max_width
-                        GROUP BY t.id, t.common_name, t.inventory
-                        HAVING t.inventory - COUNT(tr) > 0)
+                        t.id,
+                        t.common_name,
+                        t.inventory
+                    FROM trees t
+                        INNER JOIN tree_requests tr
+                                    ON t.id = tr.tree_id
+                    WHERE
+                            LOWER(t.height_range) >= :p_min_height
+                        AND UPPER(t.height_range) <= :p_max_height
+                        AND LOWER(t.height_range) >= :p_min_width
+                        AND UPPER(t.height_range) <= :p_max_width
+                    GROUP BY t.id, t.common_name, t.inventory
+                    HAVING t.inventory - COUNT(tr) > 0)
 SELECT t.common_name, COUNT(pe) AS num_planted
 FROM valid_trees t
     INNER JOIN tree_requests tr ON t.id = tr.tree_id
@@ -228,22 +228,22 @@ HAVING (SELECT COUNT(*)
 -- for a planting) has done, so that the best volunteers can be scheduled for more difficult plantings.
 
 WITH scheduled_volunters AS (SELECT
-    r.first_name || ' ' || r.last_name AS volunteer_name,
-    COUNT(sp) AS num_plantings_scheduled_for
-FROM residents r
-     INNER JOIN scheduled_plantings_have_volunteers sphv ON r.id = sphv.volunteer_id
-     LEFT OUTER JOIN scheduled_plantings sp ON sphv.planting_event_id = sp.event_id AND sp.cancelled = FALSE
-WHERE is_volunteer = TRUE
-GROUP BY r.first_name, r.last_name),
-attended_volunteers AS (SELECT
-    r.first_name || ' ' || r.last_name AS volunteer_name,
-    COUNT(pehv) AS num_plantings_attended,
-    COUNT(spe) AS num_successful_plantings_attended
-FROM residents r
-         INNER JOIN planting_events_have_volunteers pehv ON r.id = pehv.volunteer_id
-         LEFT OUTER JOIN planting_events spe ON pehv.planting_event_id = spe.scheduled_planting_id AND spe.successful = TRUE
-WHERE is_volunteer = TRUE
-GROUP BY r.first_name, r.last_name)
+                                r.first_name || ' ' || r.last_name AS volunteer_name,
+                                COUNT(sp) AS num_plantings_scheduled_for
+                            FROM residents r
+                                INNER JOIN scheduled_plantings_have_volunteers sphv ON r.id = sphv.volunteer_id
+                                LEFT OUTER JOIN scheduled_plantings sp ON sphv.planting_event_id = sp.event_id AND sp.cancelled = FALSE
+                            WHERE is_volunteer = TRUE
+                            GROUP BY r.first_name, r.last_name),
+     attended_volunteers AS (SELECT
+                                r.first_name || ' ' || r.last_name AS volunteer_name,
+                                COUNT(pehv) AS num_plantings_attended,
+                                COUNT(spe) AS num_successful_plantings_attended
+                            FROM residents r
+                                    INNER JOIN planting_events_have_volunteers pehv ON r.id = pehv.volunteer_id
+                                    LEFT OUTER JOIN planting_events spe ON pehv.planting_event_id = spe.scheduled_planting_id AND spe.successful = TRUE
+                            WHERE is_volunteer = TRUE
+                            GROUP BY r.first_name, r.last_name)
 SELECT sv.volunteer_name,
        av.num_plantings_attended,
        (sv.num_plantings_scheduled_for - av.num_plantings_attended) AS num_plantings_missed,
